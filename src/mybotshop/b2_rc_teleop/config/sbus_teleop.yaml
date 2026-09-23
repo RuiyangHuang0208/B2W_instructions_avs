@@ -1,0 +1,42 @@
+/**:
+  ros__parameters:
+    # Serial settings
+    serial_port: '/dev/arduino_sbus'
+    baud_rate: 115200
+
+    # Channel mapping (1-indexed as user specifies, converted to 0-indexed internally)
+    channel_linear_x: 3      # Forward/backward
+    channel_linear_y: 4      # Strafe
+    channel_linear_z: 6      # Up/down
+    channel_angular_x: 1     # Body pitch
+    channel_angular_y: 2     # Body roll
+    channel_angular_z: 5     # Yaw rotation
+    channel_enable: 14       # Dead-man switch
+
+    # Enable switch threshold
+    enable_threshold: 900    # Values above this = enabled
+
+    # SBUS value range
+    sbus_min: 172
+    sbus_max: 1811
+    sbus_center: 992
+
+    # Velocity scaling (m/s for linear, rad/s for angular)
+    # Use negative values to invert direction
+    max_linear_x: 0.5        # Forward/backward speed
+    max_linear_y: -0.3       # Strafe speed (Inverted)
+    max_linear_z: 0.1        # (unused for cmd_vel, used for body height)
+    max_angular_x: 0.4       # (unused for cmd_vel, used for body pitch)
+    max_angular_y: 0.4       # (unused for cmd_vel, used for body roll)
+    max_angular_z: -0.8      # Yaw rate (Inverted)
+
+    # Body pose limits (for hardware/body_pose topic)
+    max_body_roll: 0.4       # radians (~23 degrees) from CH2
+    max_body_pitch: 0.4      # radians (~23 degrees) from CH1
+    max_body_height: 0.1     # meters (-0.1 to +0.1) from CH6
+
+    # Deadzone (fraction of half-range, 0.0-1.0)
+    deadzone: 0.05
+
+    # Publishing rate (Hz)
+    publish_rate: 20.0

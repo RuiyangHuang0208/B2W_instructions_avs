@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<!--
+Software License Agreement (BSD)
+
+@author    Salman Omar Sohail <support@mybotshop.de>
+@copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+-->
+
+<head>
+    <title>Robot Webserver</title>
+    <link rel="icon" href="../static/media/logos/mbs_logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../static/css/all.min.css" type="text/css" /> <!-- Font Awesome -->
+    <script src="../static/scripts/index_script.js" defer></script>
+    <script src="../static/scripts/common_script.js" defer></script>
+    <script src="../static/scripts/console_script.js" defer></script>
+    <script type="module" src="../static/scripts/model_scripts.js" defer></script>
+</head>
+
+<body>
+
+    <div class="navbar"> </div>
+
+    <div class="container">
+        <!-- Background Media -->
+        <div class="background-media">
+            <img src="../static/media/wallpaper/wallpaper.webp" alt="Background GIF">
+        </div>
+
+        <!-- Main Panels -->
+        <div class="panel-container">
+
+            <!-- Status Panel -->
+            <div class="panel status-panel">
+                <h2>Robot <span style="color: var(--project-color);">Status</span></h2>
+                <hr class="heading-line">
+
+                <h3>Robot <span style="color: var(--project-color);">Modules</span></h3>
+                <div id="statusInfo">Fetching module status...</div>
+                <br>
+                <div class="div-btns">
+                    <button onclick="reactivateServices()">Re-activate Srvs.</button>
+                    <button onclick="deactivateServices()" class="deactivate-btn">De-activate Srvs.</button>
+                    <button style="background-color: var(--project-config-color);" onclick="webButton('create_logs')">
+                        Save Sys. Logs</button>
+                </div>
+
+                <br>
+
+                <h3>Web <span style="color: var(--project-color);">Log</span></h3>
+                <span style="color: var(--project-light-color);">Server Response:</span> <span
+                    id="responseMessage">Awaiting
+                    commands</span>
+
+            </div>
+            <!-- /Status Panel -->
+
+            <!-- Robot Information -->
+            <div class="panel information-panel">
+                <h2>Robot <span style="color: var(--project-color);">Information</span></h2>
+                <hr class="heading-line">
+
+                <!-- Software -->
+                <h3>Robot <span style="color: var(--project-color);">Software</span></h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Model Type</td>
+                            <td>Research</td>
+                        </tr>
+
+                        <tr>
+                            <td>Order Number</td>
+                            <td>AU202411131353</td>
+                        </tr>
+
+                        <tr>
+                            <td>B2 S/N</td>
+                            <td>B2-366</td>
+                        </tr>
+
+                        <tr>
+                            <td>ROS Distribution</td>
+                            <td>Humble</td>
+                        </tr>
+
+                        <tr>
+                            <td>ROS Firmware Date</td>
+                            <td>12-June-2025</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <!-- /Software -->
+
+                <!-- IPs -->
+                <h3>Robot <span style="color: var(--project-color);">Internet</span> Protocol</span></h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>IP</th>
+                            <th>Username</th>
+                            <th>Password</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>B2 MCU</td>
+                            <td><a href="http://192.168.123.161" target="_blank">192.168.123.161</a></td>
+                            <td>x</td>
+                            <td>x</td>
+                        </tr>
+                        <tr>
+                            <td>B2 Robosense\Hesai\Livox</td>
+                            <td><a href="http://192.168.123.162" target="_blank">192.168.123.162</a></td>
+                            <td>x</td>
+                            <td>x</td>
+                        </tr>
+                        <tr>
+                            <td>B2 PC4 (ssh)</td>
+                            <td><a href="http://192.168.123.164" target="_blank">192.168.123.164</a></td>
+                            <td>unitree</td>
+                            <td>Unitree0408</td>
+                        </tr>
+                        <tr>
+                            <td>B2 PC4 (Web)</td>
+                            <td><a href="http://192.168.123.164:9000" target="_blank">192.168.123.164:9000</a></td>
+                            <td>x</td>
+                            <td>mybotshop</td>
+                        </tr>                       
+                    </tbody>
+                </table>
+                <!-- /IPs -->
+
+            </div>
+            <!-- /Robot Information -->
+
+            <!-- ROBOT Model -->
+            <div class="panel information-panel">
+                <h2>B2 <span style="color: #34a734;">RESEARCH</span></h2>
+                <hr class="heading-line">
+                <div class="model-viewer-container">
+                    <model-viewer src="../static/models/b2.glb" alt="MYBOTSHOP ROBOT" auto-rotate camera-controls
+                        shadow-intensity="1" exposure="1.0" camera-orbit="45deg 65deg" auto-rotate-speed="2"
+                        environment-image="neutral" style="width: 90%; height: 600px; border-radius: 20px;">
+                        <!-- x z y -->
+                        <div class="hotspot" slot="hotspot-sensor-01" data-position="37.0 40.0 0.0" data-normal="0 0 1">
+                            <div class="hotspot-point"></div>
+                            <div class="hotspot-tooltip">Lidar: Unitree L1 </div>
+                        </div>
+
+                        <div class="hotspot" slot="hotspot-sensor-02" data-position="46.0 21.0 0.0" data-normal="0 0 1">
+                            <div class="hotspot-point"></div>
+                            <div class="hotspot-tooltip">Depth Camera: Realsense D435i </div>
+                        </div>
+
+                        <div class="hotspot" slot="hotspot-sensor-03" data-position="0.0 14.5 14.0" data-normal="0 0 1">
+                            <div class="hotspot-point"></div>
+                            <div class="hotspot-tooltip">Robot: Battery </div>
+                        </div>
+
+
+                    </model-viewer>
+                </div>
+            </div>
+            <!-- /Robot Model -->
+
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup_"> </div>
+
+    <!-- Footer -->
+    <div class="footer_"> </div>
+
+</body>
+
+</html>

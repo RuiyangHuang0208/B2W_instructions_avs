@@ -1,0 +1,367 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Software License Agreement (BSD)
+#
+# @author    Salman Omar Sohail <support@mybotshop.de>
+# @copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+
+import time
+import rclpy
+import numpy as np
+
+from rclpy.node import Node
+from b2_platform.utils.transforms import *
+from tf2_ros import TransformBroadcaster
+from math import sqrt, atan2, sin, cos, pi
+
+from nav_msgs.msg import Odometry
+from unitree_go.msg import LowState, SportModeState
+from sensor_msgs.msg import JointState, Imu
+from geometry_msgs.msg import Quaternion, Vector3, TransformStamped
+from sensor_msgs.msg import BatteryState
+
+
+class B2StateController(Node):
+    def __init__(self):
+        super().__init__('b2_statepublisher')
+        self.get_logger().info(
+            f'{self.colorize("Initializing B2 State Publisher","yellow")}')
+
+        # Parameters
+        self.declare_parameters(namespace='', parameters=[('robot_odom_pub', False),
+                                                          ('robot_odom_tf',
+                                                           'unconfigured_odom_tf'),
+                                                          ('robot_baselink_tf',
+                                                           'unconfigured_tf'),
+                                                          ('unitree_odom_topic',
+                                                           'unconfigured_unitree_odom'),
+                                                          ('unitree_low_state_topic', 'unconfigured_low_state')])
+
+        self.param_robot_odom_pub = self.get_parameter('robot_odom_pub').value
+        self.param_robot_odom_tf = self.get_parameter('robot_odom_tf').value
+        self.param_robot_baselink_tf = self.get_parameter(
+            'robot_baselink_tf').value
+        self.param_unitree_odom_topic = self.get_parameter(
+            'unitree_odom_topic').value
+        self.param_unitree_low_state_topic = self.get_parameter(
+            'unitree_low_state_topic').value
+
+        self.get_logger().info(
+            f'{self.colorize("robot_odom_pub:","blue")} {self.param_robot_odom_pub}')
+        self.get_logger().info(
+            f'{self.colorize("robot_odom_tf:","blue")} {self.param_robot_odom_tf}')
+        self.get_logger().info(
+            f'{self.colorize("robot_baselink_tf:","blue")} {self.param_robot_baselink_tf}')
+        self.get_logger().info(
+            f'{self.colorize("unitree_odom_topic:","blue")} {self.param_unitree_odom_topic}')
+        self.get_logger().info(
+            f'{self.colorize("unitree_low_state_topic:","blue")} {self.param_unitree_low_state_topic}')
+
+        # URDF
+        self.robot_odom_tf = self.param_robot_odom_tf
+        self.robot_baselink_tf = self.param_robot_baselink_tf
+
+        # Flags
+        self.b2_flag = False
+        self.b2_battery = None
+        self.odom_state = None
+        self.odom_kinematics_data = None
+
+        # Subscribers
+        self.sub_state_contacts = self.create_subscription(
+            LowState, self.param_unitree_low_state_topic, self.callback_state_contacts, 10)
+        # self.sub_odom_lidar = self.create_subscription(
+        #     Odometry, '/lio_sam_ros2/mapping/odometry', self.callback_lidar_odom, 10)
+        self.sub_odom_kienmatics = self.create_subscription(
+            SportModeState, self.param_unitree_odom_topic, self.callback_kinematics_odom, 10)
+        # self.subscriber_imu = self.create_subscription(
+        #     Imu, '/dog_imu_raw', self.callback_imu, 10)
+
+        # Publishers
+        self.publisher_battery = self.create_publisher(
+            BatteryState, 'sensor/battery/state', 10)
+
+        self.publisher_odom = self.create_publisher(Odometry, 'base/odom', 10)
+        self.pub_data_odom = Odometry()
+
+        self.publisher_odom_tf = TransformBroadcaster(self)
+        self.pub_data_odom_tf = TransformStamped()
+
+        self.publisher_imu = self.create_publisher(Imu, 'sensor/imu/data', 10)
+        self.pub_data_imu = Imu()
+
+        self.publisher_jointstate = self.create_publisher(
+            JointState, 'joint_states', 10)
+        self.pub_data_jointstate = JointState()
+
+        # Track Startup
+        self.startup_time = time.time()
+        self.startup_wait = 3.0
+
+        # Add timer callback
+        self.create_timer(0.01, self.update_joint_states)
+        self.create_timer(0.01, self.update_odom_kinematics)
+        self.create_timer(2.0, self.update_battery_state)
+        # self.create_timer(0.01, self.update_odom_lidar)
+
+        self.get_logger().info(
+            f'{self.colorize("Initialization Complete!","yellow")}')
+
+    def colorize(self, text, color):
+        color_codes = {
+            'green': '\033[92m',
+            'yellow': '\033[93m',
+            'orange': '\033[38;5;208m',
+            'blue': '\033[94m',
+            'red': '\033[91m'
+        }
+        return color_codes[color] + text + '\033[0m'
+
+    def callback_state_contacts(self, data):
+        """
+        Callback function for the LowState subscriber.
+        """
+        self.b2_motor_state = data.motor_state
+        self.b2_imu_state = data.imu_state
+        self.b2_flag = True
+        self.b2_battery = data.bms_state
+
+    def callback_imu(self, data):
+        self.imu_state = data
+
+    def callback_lidar_odom(self, data):
+        self.odom_state = data
+
+    def callback_kinematics_odom(self, data):
+        """
+        Callback function for the SportModeState subscriber.
+        Extracts odometry data and updates the Odometry message.
+        """
+        self.odom_kinematics_data = data
+
+    def update_odom_kinematics(self):
+        if self.odom_kinematics_data is not None:
+            # Extract position
+            position = self.odom_kinematics_data.position
+            # TODO: Check if this is correct in all B2 models
+            self.pub_data_odom.pose.pose.position.x = float(position[0])*-1.0
+            # TODO: Check if this is correct in all B2 models
+            self.pub_data_odom.pose.pose.position.y = float(position[1])*-1.0
+            # TODO: Check if this is correct in all B2 models
+            self.pub_data_odom.pose.pose.position.z = 0.0
+
+            # Extract orientation (quaternion)
+            # quaternion = self.odom_kinematics_data.imu_state.quaternion # Wrong format
+            # quaternion = flip_vertical(quaternion)
+
+            quaternion = quaternion_from_euler(
+                self.odom_kinematics_data.imu_state.rpy[2],
+                # TODO: Check if this is correct in all B2 models
+                self.odom_kinematics_data.imu_state.rpy[1]+pi,
+                self.odom_kinematics_data.imu_state.rpy[0],
+            )
+
+            self.pub_data_odom_tf.transform.rotation.x = float(quaternion[0])
+            self.pub_data_odom_tf.transform.rotation.y = float(quaternion[1])
+            self.pub_data_odom_tf.transform.rotation.z = float(quaternion[2])
+            self.pub_data_odom_tf.transform.rotation.w = float(quaternion[3])
+
+            # Extract linear velocity
+            velocity = self.odom_kinematics_data.velocity
+            self.pub_data_odom.twist.twist.linear.x = float(velocity[0])
+            self.pub_data_odom.twist.twist.linear.y = float(velocity[1])
+            self.pub_data_odom.twist.twist.linear.z = float(velocity[2])
+
+            # Extract angular velocity (yaw_speed)
+            self.pub_data_odom.twist.twist.angular.z = float(
+                self.odom_kinematics_data.yaw_speed)
+
+            # Set the header
+            self.pub_data_odom.header.stamp = self.get_clock().now().to_msg()
+            self.pub_data_odom.header.frame_id = self.robot_odom_tf
+            self.pub_data_odom.child_frame_id = self.robot_baselink_tf
+
+            # Publish the Odometry message
+            self.publisher_odom.publish(self.pub_data_odom)
+
+            # Log the received data
+            self.get_logger().info(
+                f'{self.colorize("B2 Kinematics Odom Data Received","green")}', once=True)
+
+            # Update TF Broadcaster
+            self.pub_data_odom_tf.header.frame_id = self.robot_odom_tf
+            self.pub_data_odom_tf.child_frame_id = self.robot_baselink_tf
+            self.pub_data_odom_tf.header.stamp = self.get_clock().now().to_msg()
+            self.pub_data_odom_tf.transform.translation.x = float(
+                position[0])*-1.0  # TODO: Check if this is correct in all B2 models
+            self.pub_data_odom_tf.transform.translation.y = float(
+                position[1])*-1.0  # TODO: Check if this is correct in all B2 models
+            # TODO: Check if this is correct in all B2 models
+            self.pub_data_odom_tf.transform.translation.z = 0.0
+
+            self.pub_data_odom_tf.transform.rotation.x = float(quaternion[0])
+            self.pub_data_odom_tf.transform.rotation.y = float(quaternion[1])
+            self.pub_data_odom_tf.transform.rotation.z = float(quaternion[2])
+            self.pub_data_odom_tf.transform.rotation.w = float(quaternion[3])
+
+            if self.param_robot_odom_pub:
+                self.publisher_odom_tf.sendTransform(self.pub_data_odom_tf)
+
+    def update_odom_lidar(self):
+        if self.odom_state is not None:
+            self.pub_data_odom.header.stamp = self.get_clock().now().to_msg()
+            self.pub_data_odom.header.frame_id = self.robot_odom_tf
+            self.pub_data_odom.child_frame_id = self.robot_baselink_tf
+            self.pub_data_odom.pose.pose.position.x = self.odom_state.pose.pose.position.x
+            self.pub_data_odom.pose.pose.position.y = self.odom_state.pose.pose.position.y
+            self.pub_data_odom.pose.pose.position.z = self.odom_state.pose.pose.position.z
+            self.pub_data_odom.pose.pose.orientation = self.odom_state.pose.pose.orientation
+            self.pub_data_odom.twist = self.odom_state.twist
+            self.publisher_odom.publish(self.pub_data_odom)
+
+            self.pub_data_odom_tf.header.frame_id = self.robot_odom_tf
+            self.pub_data_odom_tf.child_frame_id = self.robot_baselink_tf
+            self.pub_data_odom_tf.header.stamp = self.get_clock().now().to_msg()
+            self.pub_data_odom_tf.transform.translation.x = self.pub_data_odom.pose.pose.position.x
+            self.pub_data_odom_tf.transform.translation.y = self.pub_data_odom.pose.pose.position.y
+            self.pub_data_odom_tf.transform.translation.z = self.pub_data_odom.pose.pose.position.z
+            self.pub_data_odom_tf.transform.rotation = self.pub_data_odom.pose.pose.orientation
+            if self.param_robot_odom_pub:
+                self.publisher_odom_tf.sendTransform(self.pub_data_odom_tf)
+            self.get_logger().info(
+                f'{self.colorize("B2 Odom Data Received","green")}', once=True)
+        else:
+            if time.time() - self.startup_time > self.startup_wait:
+                self.get_logger().error(
+                    f'{self.colorize("No B2 Odom Data Received","orange")}', throttle_duration_sec=5)
+
+    def update_imu(self):
+        if self.imu_state is not None:
+            self.publisher_imu.publish(self.imu_state)
+            self.get_logger().info(
+                f'{self.colorize("B2 IMU Data Received","green")}', once=True)
+        else:
+            if time.time() - self.startup_time > self.startup_wait:
+                self.get_logger().error(
+                    f'{self.colorize("No B2 IMU Data Received","orange")}', throttle_duration_sec=5)
+
+    def update_joint_states(self):
+        """
+        Update the joint states and publish them.
+
+        This method updates the joint states of the robot and publishes them using the `publisher_jointstate`.
+        It sets the header stamp and frame_id of the joint state message, assigns the joint names, 
+        sets the effort values to 0.0, and sets the joint positions based on the received B2 joint positions data.
+        If no B2 joint positions data is received within a certain time, it logs an error message.
+        Finally, it publishes the joint state message.
+
+        Returns:
+            None
+        """
+        self.pub_data_jointstate.header.stamp = self.get_clock().now().to_msg()
+        self.pub_data_jointstate.header.frame_id = 'base_link'
+        self.pub_data_jointstate.name = [
+            'FR_thigh_joint', 'FR_hip_joint', 'FR_calf_joint',
+            'FL_thigh_joint', 'FL_hip_joint', 'FL_calf_joint',
+            'RR_thigh_joint', 'RR_hip_joint', 'RR_calf_joint',
+            'RL_thigh_joint', 'RL_hip_joint', 'RL_calf_joint',
+            'FR_wheel_joint', 'FL_wheel_joint', 'RR_wheel_joint', 'RL_wheel_joint']
+        self.pub_data_jointstate.effort = [0.0]*19
+
+        if self.b2_flag == False:
+            if time.time() - self.startup_time > self.startup_wait:
+                self.get_logger().error(
+                    f'{self.colorize("No B2 joint positions Data Received","orange")}', throttle_duration_sec=5)
+            self.pub_data_jointstate.position = [0.0]*19
+            return
+        else:
+            self.joints_assignment()
+            self.get_logger().info(
+                f'{self.colorize("B2 joint positions Data Received","green")}', once=True)
+            self.publisher_jointstate.publish(self.pub_data_jointstate)
+
+    def joints_assignment(self):
+        """
+        Assigns the joint positions to the JointState message.
+        """
+        joint_indices = {
+            "FR_thigh_joint": 1,
+            "FR_hip_joint": 0,
+            "FR_calf_joint": 2,
+            "FL_thigh_joint": 4,
+            "FL_hip_joint": 3,
+            "FL_calf_joint": 5,
+            "RR_thigh_joint": 7,
+            "RR_hip_joint": 6,
+            "RR_calf_joint": 8,
+            "RL_thigh_joint": 10,
+            "RL_hip_joint": 9,
+            "RL_calf_joint": 11,
+            "FR_wheel_joint": 12,
+            "FL_wheel_joint": 13,
+            "RR_wheel_joint": 14,
+            "RL_wheel_joint": 15,
+        }
+
+        joint_positions = [
+            self.b2_motor_state[index].q for index in joint_indices.values()]
+
+        self.pub_data_jointstate.position = joint_positions
+
+    def update_battery_state(self):
+        try:
+            if not self.b2_battery:
+                return
+
+            self.get_logger().info(
+                f'{self.colorize(f"B2 Battery Publisher Activated","green")}', once=True)
+
+            msg = BatteryState()
+            msg.header.stamp = self.get_clock().now().to_msg()
+
+            # Estimate voltage
+            voltage = self.b2_battery.cell_vol
+
+            voltages = [v / 1000.0 for v in voltage if v > 0]
+            msg.voltage = sum(voltages)
+
+            # Convert current from mA to A
+            msg.current = self.b2_battery.current / 1000.0
+
+            # Estimate percentage from SoC
+            msg.percentage = self.b2_battery.soc / 100.0
+            msg.charge = msg.percentage * msg.voltage
+
+            msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_DISCHARGING
+            msg.power_supply_health = BatteryState.POWER_SUPPLY_HEALTH_GOOD
+            msg.power_supply_technology = BatteryState.POWER_SUPPLY_TECHNOLOGY_LION
+            msg.present = True
+
+            self.publisher_battery.publish(msg)
+
+        except Exception as e:
+            self.get_logger().error(f"Exception in update_battery_state: {e}")
+
+    def destroy_node(self):
+        self.get_logger().info(
+            f'{self.colorize("B2 State Publisher is shutting down","red")}')
+        super().destroy_node()
+
+
+def main(args=None):
+
+    rclpy.init(args=args)
+    rk = B2StateController()
+
+    try:
+        rclpy.spin(rk)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        rk.destroy_node()
+        rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()

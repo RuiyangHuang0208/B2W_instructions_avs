@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+  <xacro:macro name="d405" params="xyz rpy parent">
+
+    <joint name="d405_bracket_joint" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin xyz="${xyz}" rpy="${rpy}"/>
+        <parent link="${parent}"/>
+        <child link="d405_bracket_link"/>
+    </joint> 
+
+    <joint name="d405_joint" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin xyz="0.015 0 0.03" rpy="0 0 0"/>
+        <parent link="d405_bracket_link"/>
+        <child link="d405_link"/>
+    </joint> 
+
+    <link name="d405_bracket_link">
+      <visual>
+        <geometry>
+            <mesh filename="package://b2_description/meshes/3d_brackets/d405_bracket.dae" scale="0.1 0.1 0.1"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+            <mesh filename="package://b2_description/meshes/3d_brackets/d405_bracket.stl" scale="0.1 0.1 0.1"/>
+        </geometry>
+      </collision>
+    </link>
+
+
+    <link name="d405_link">
+      <visual>
+        <geometry>
+            <mesh filename="package://b2_description/meshes/realsense/d405.dae" scale="0.1 0.1 0.1"/>
+        </geometry>
+      </visual>
+      <collision>
+        <geometry>
+            <mesh filename="package://b2_description/meshes/realsense/d405.stl" scale="0.1 0.1 0.1"/>
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+</robot>

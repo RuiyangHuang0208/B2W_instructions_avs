@@ -1,0 +1,26 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/opt/ros/lyrical/include/**",
+        "/home/ruiyang/Unitree_B2_MybotShop_Software-main/src/mybotshop/b2_platform/include/**",
+        "/home/ruiyang/Unitree_B2_MybotShop_Software-main/src/third_party/gps/26May2025_automatepro_ntrip_client/include/**",
+        "/home/ruiyang/Unitree_B2_MybotShop_Software-main/src/third_party/gps/26May2025_ublox-ros2/ublox_gps/include/**",
+        "/home/ruiyang/Unitree_B2_MybotShop_Software-main/src/third_party/gps/26May2025_ublox-ros2/ublox_msgs/include/**",
+        "/home/ruiyang/Unitree_B2_MybotShop_Software-main/src/third_party/gps/26May2025_ublox-ros2/ublox_serialization/include/**",
+        "/home/ruiyang/Unitree_B2_MybotShop_Software-main/src/third_party/unitree/18Mar2025_unitree_ros2/example/src/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

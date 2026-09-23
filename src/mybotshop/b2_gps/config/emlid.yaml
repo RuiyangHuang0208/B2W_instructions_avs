@@ -1,0 +1,4 @@
+/**:
+  realsense_i:
+    ros__parameters:
+      topic: false

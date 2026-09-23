@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<!--
+Software License Agreement (BSD)
+
+@author    Salman Omar Sohail <support@mybotshop.de>
+@copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+-->
+
+<head>
+    <title>Navigation - Robot Webserver</title>
+    <link rel="icon" href="../static/media/logos/mbs_logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css" />
+    <script src="../static/scripts/common_script.js" defer></script>
+    <script src="../static/scripts/console_script.js" defer></script>
+    <script src="../static/scripts/gps_map_script.js" defer></script>
+</head>
+
+<body>
+    <div class="navbar"> </div>
+
+    <div class="container">
+
+        <!-- Background Media -->
+        <div class="background-media">
+            <img src="../static/media/wallpaper/wallpaper.webp" alt="Background GIF">
+        </div>
+
+        <!-- Main Panels -->
+        <div class="panel-container">
+
+            <!-- Outdoor Navi -->
+            <div class="panel map-panel">
+                <!-- World Map Panel -->
+                <div id="map">
+                    <!-- Outdoor Controls -->
+                    <div class="map-controls">
+                        <div class="map-control-group">
+                            <h4>Waypoint <span style="color: var(--project-light-color);">Tools</span></h4>
+                            <button onclick="saveWaypoints()">Save Waypoints</button>
+                            <button style="background-color: var(--project-config-color);"
+                                onclick="loadWaypoints()">Load Waypoints</button>
+                            <button style="background-color: var(--project-error-color);"
+                                onclick="clearWaypoints()">Clear Waypoints</button>
+                        </div>
+                        <div class="map-control-group">
+                            <h4>Waypoint <span style="color: var(--project-light-color);">Zones</span></h4>
+                            <button onclick="loadWaypoints()">Create Waypoint Path</button>
+                            <button style="background-color: var(--project-error-color);"
+                                onclick="clearWaypoints()">Create No Go Zones</button>
+                        </div>
+                        <div class="map-control-group">
+                            <h4>Waypoint <span style="color: var(--project-light-color);">Navigation</span></h4>
+                            <button onclick="loadWaypoints()">Follow Waypoint</button>
+                            <button style="background-color: var(--project-config-color);"
+                                onclick="clearWaypoints()">Pause Waypoint</button>
+                            <button style="background-color: var(--project-error-color);"
+                                onclick="clearWaypoints()">Cancel Waypoint</button>
+                        </div>
+                        <div class="map-control-group">
+                            <h4>Nav2 <span style="color: var(--project-light-color);">Controls</span></h4>
+                            <button onclick="webButton('start_map_navi')">Nav2 Start</button>
+                            <button style="background-color: var(--project-error-color);"
+                                onclick="webButton('stop_map_navi')">Nav2 Stop</button>
+                        </div>
+                        <div class="map-control-group">
+                            <h4>Web <span style="color: var(--project-light-color);">Response</span></h4>
+                            <span id="responseMessage">Awaiting commands</span>
+                        </div>
+                    </div>
+                    <!-- / Outdoor Controls -->
+
+                </div>
+                <!-- /World Map Panel -->
+            </div>
+            <!-- /Outdoor Navi -->
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup_"> </div>
+
+    <!-- Footer -->
+    <div class="footer_"> </div>
+</body>
+
+</html>

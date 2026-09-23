@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Add Realsense D435i Depth Camera -->
+  <xacro:if value="$(optenv B2_REALSENSE 1)">
+    <xacro:include filename="file:$(find b2_description)/xacro/realsense/d435i.urdf.xacro" />
+  </xacro:if>
+  <!-- Add Open Manipulator -->
+  <xacro:if value="$(optenv B2_OPEN_MANIPULATOR 0)">
+    <xacro:include filename="file:$(find b2_description)/xacro/open_manipulator/om_complete.urdf.xacro" />
+  </xacro:if>
+  <!-- Add Realsense D405 Depth Camera -->
+  <xacro:if value="$(optenv B2_REALSENSE_WRIST 0)">
+    <xacro:include filename="file:$(find b2_description)/xacro/realsense/d405.urdf.xacro" />
+    <xacro:d405 xyz='0.0245 0 0.03' rpy='0 0 0' parent='link5' />
+  </xacro:if>
+
+</robot>

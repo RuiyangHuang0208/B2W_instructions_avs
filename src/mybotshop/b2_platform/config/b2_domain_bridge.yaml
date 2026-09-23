@@ -1,0 +1,13 @@
+name: b2_domain_bridge
+from_domain: 0
+to_domain: 10
+topics:
+  odommodestate:
+    type: unitree_go/msg/SportModeState
+  lf/lowstate:
+    type: unitree_go/msg/LowState
+  cmd_vel:
+    type: geometry_msgs/msg/Twist
+  # front_videohub/videostream:
+  #   type: unitree_go/msg/Go2FrontVideoData
+  

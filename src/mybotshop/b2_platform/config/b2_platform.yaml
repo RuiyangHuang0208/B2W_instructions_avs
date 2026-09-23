@@ -1,0 +1,22 @@
+/**:
+  b2_statepublisher:
+    ros__parameters:
+      robot_odom_pub: True
+      robot_odom_tf: 'odom'
+      robot_baselink_tf: 'base_link'
+      unitree_odom_topic: 'odommodestate'
+      unitree_low_state_topic: 'lf/lowstate'
+
+  b2_front_video:
+    ros__parameters:
+      lan_port: "eno2"
+      camera_type: "front"
+      camera_port: "1720"
+      camera_frame: "front_camera"
+
+  b2_rear_video:
+    ros__parameters:
+      lan_port: "eno2"
+      camera_type: "rear"
+      camera_port: "1721"
+      camera_frame: "rear_camera"

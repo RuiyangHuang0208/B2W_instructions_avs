@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    baud_rate: 57600
+    connection_port: '/dev/b2/nano'
+

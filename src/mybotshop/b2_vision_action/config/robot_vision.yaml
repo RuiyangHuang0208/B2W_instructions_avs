@@ -1,0 +1,14 @@
+#@author    Salman Omar Sohail <support@mybotshop.de>
+#@copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+
+/**:
+  b2_vision_action:
+    ros__parameters:
+      yolo_model: "best.pt"
+      sub_image: "b2_366/color/image_rect_raw"
+      depth_image: "b2_366/depth/image_rect_raw"
+      camera_info_topic: "b2_366/color/camera_info"
+      pub_image: "yolo/image"
+      camera_frame: "head_link"
+      detection_list:
+        - "Smoking"

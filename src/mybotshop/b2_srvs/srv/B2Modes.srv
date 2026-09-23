@@ -1,0 +1,5 @@
+# b2_srvs/srv/B2Modes.srv
+string request_data
+---
+bool success
+string reason

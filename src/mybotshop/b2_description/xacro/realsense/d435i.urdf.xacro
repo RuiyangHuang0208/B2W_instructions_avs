@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <link name="d435i_bracket_link">
+    <visual>
+      <geometry>
+          <mesh filename="package://b2_description/meshes/3d_brackets/realsense_d435i_bracket.dae" scale="0.08 0.08 0.08"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+          <mesh filename="package://b2_description/meshes/3d_brackets/realsense_d435i_bracket.stl" scale="0.08 0.08 0.08"/>
+      </geometry>
+    </collision>
+  </link>
+    
+  <joint name="d435i_bracket_joint" type="fixed">
+        <axis xyz="0 0 1" />
+        <origin xyz="0.008 0 0.15"  rpy="0 0 0"/>
+        <parent link="lidar_link"/>
+        <child link="d435i_bracket_link"/>
+    </joint> 
+
+  <xacro:arg name="use_nominal_extrinsics" default="false"/>
+  <xacro:include filename="$(find realsense2_description)/urdf/_d435i.urdf.xacro" />
+  <xacro:sensor_d435i name="d435i" parent="lidar_link" use_nominal_extrinsics="$(arg use_nominal_extrinsics)">
+    <!-- <origin xyz="0 0 0.15" rpy="0 0.314 0"/>  --> <!-- Screw location -->
+    <!-- <origin xyz="0.05 0 0.15" rpy="0 0.314 0"/> Default Camera location -->
+    <origin xyz="0.05 0 0.15" rpy="0 0 0"/> <!-- Camera location -->
+
+  </xacro:sensor_d435i>
+
+</robot>

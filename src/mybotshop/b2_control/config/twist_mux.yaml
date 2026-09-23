@@ -1,0 +1,41 @@
+/**:
+  twist_mux_node:
+    ros__parameters:
+      topics:
+        steamdeck_joy:
+          topic   : steamdeck_joy_teleop/cmd_vel
+          timeout : 0.5
+          priority: 20
+        logitech_joy:
+          topic   : joy_teleop/cmd_vel
+          timeout : 0.5
+          priority: 15
+        webserver:
+          topic   : webserver/cmd_vel
+          timeout : 0.5
+          priority: 10
+        interactive_marker:
+          topic   : twist_marker_server/cmd_vel
+          timeout : 0.5
+          priority: 7
+        external:
+          topic   : cmd_vel
+          timeout : 0.5
+          priority: 5
+        autonomous_high_priority:
+          topic   : autonomous_high_priority/cmd_vel
+          timeout : 0.5
+          priority: 3
+        autonomous_mid_priority:
+          topic   : autonomous_mid_priority/cmd_vel
+          timeout : 0.5
+          priority: 2
+        autonomous_low_priority:
+          topic   : autonomous_low_priority/cmd_vel
+          timeout : 0.5
+          priority: 1
+      locks:
+        e_stop:
+          topic   : e_stop
+          timeout : 0.0
+          priority: 255

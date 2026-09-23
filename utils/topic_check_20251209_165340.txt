@@ -1,0 +1,2372 @@
+==============================================
+ROS2 Topic Check - Tue Dec  9 04:53:40 PM CET 2025
+==============================================
+
+----------------------------------------------
+TOPIC: /EstimatorData
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/EstimatorData
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+The message type 'unitree_go/msg/EstimatorData' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /SymState
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/SymState
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+The message type 'unitree_go/msg/SymState' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /SymState_back
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/SymState
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+The message type 'unitree_go/msg/SymState' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/back_videohub/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/back_videohub/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/bashrunner/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/bashrunner/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/config/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/config/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/front_videohub/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/front_videohub/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/motion_switcher/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/motion_switcher/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/obstacles_avoid/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/obstacles_avoid/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/robot_state/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/robot_state/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/slam_logic/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/slam_logic/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/slam_operate/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 2
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/slam_operate/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 0
+Subscription count: 2
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/sport/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 2
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+header:
+  identity:
+    id: 5717857864622
+    api_id: 1034
+  lease:
+    id: 0
+  policy:
+    priority: 0
+    noreply: false
+parameter: '["bodyHeight","footRaiseHeight","speedLevel"]'
+binary: []
+---
+
+----------------------------------------------
+TOPIC: /api/sport/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 2
+
+[DATA] (timeout: 3s)
+header:
+  identity:
+    id: 5719858903540
+    api_id: 1034
+  status:
+    code: 0
+data: '{"gait":"{\"data\":0}","mode":"{\"data\":7}"}'
+binary: []
+---
+
+----------------------------------------------
+TOPIC: /api/sport_lease/request
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Request
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /api/sport_lease/response
+----------------------------------------------
+[INFO]
+Type: unitree_api/msg/Response
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /back_videohub/inner
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /back_videohub/videostream
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/Go2FrontVideoData
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+time_frame: 544883819
+video720p:
+- 108
+- 28
+- 0
+- 0
+- 0
+- 0
+- 0
+- 1
+- 65
+- 247
+- 108
+- 200
+- 64
+- 143
+- 90
+- 174
+- 77
+- 28
+- 106
+- 158
+- 50
+- 133
+- 208
+- 122
+- 82
+- 144
+- 152
+- 120
+- 38
+- 9
+- 94
+- 101
+- 117
+- 27
+- 47
+- 183
+- 165
+- 92
+- 154
+- 127
+- 130
+- 184
+- 98
+- 79
+- 180
+- 244
+- 80
+- 70
+- 98
+- 122
+- 30
+- 223
+- 11
+- 89
+- 118
+- 39
+- 99
+- 174
+- 255
+- 247
+- 175
+- 227
+- 172
+- 125
+- 139
+- 177
+- 13
+- 138
+- 122
+- 225
+- 74
+- 248
+- 38
+- 208
+- 172
+- 104
+- 137
+- 38
+- 85
+- 144
+- 23
+- 193
+- 63
+- 177
+- 243
+- 6
+- 171
+- 227
+- 161
+- 73
+- 251
+- 81
+- 98
+- 108
+- 152
+- 98
+- 126
+- 120
+- 47
+- 160
+- 47
+- 64
+- 94
+- 62
+- 48
+- 34
+- 40
+- 116
+- 8
+- 193
+- 188
+- 126
+- 253
+- 239
+- 30
+- 26
+- 124
+- 77
+- 255
+- 48
+- 159
+- 61
+- 87
+- 249
+- 250
+- 244
+- 79
+- 94
+- '...'
+video360p: []
+video180p: []
+---
+
+----------------------------------------------
+TOPIC: /config_change_status
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/ConfigChangeStatus
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+The message type 'unitree_go/msg/ConfigChangeStatus' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /front_videohub/inner
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /front_videohub/videostream
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/Go2FrontVideoData
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+time_frame: 545383695
+video720p:
+- 234
+- 69
+- 0
+- 0
+- 0
+- 0
+- 0
+- 1
+- 65
+- 247
+- 108
+- 200
+- 79
+- 27
+- 57
+- 122
+- 18
+- 230
+- 215
+- 146
+- 208
+- 200
+- 215
+- 13
+- 56
+- 65
+- 29
+- 134
+- 10
+- 22
+- 228
+- 242
+- 170
+- 82
+- 23
+- 127
+- 171
+- 119
+- 255
+- 140
+- 233
+- 230
+- 150
+- 185
+- 191
+- 128
+- 199
+- 159
+- 122
+- 166
+- 80
+- 188
+- 109
+- 108
+- 106
+- 43
+- 253
+- 105
+- 113
+- 36
+- 205
+- 65
+- 159
+- 238
+- 100
+- 227
+- 89
+- 241
+- 208
+- 181
+- 3
+- 250
+- 227
+- 47
+- 123
+- 127
+- 252
+- 41
+- 193
+- 249
+- 40
+- 122
+- 185
+- 85
+- 229
+- 219
+- 12
+- 104
+- 199
+- 109
+- 45
+- 209
+- 161
+- 94
+- 208
+- 26
+- 217
+- 57
+- 233
+- 240
+- 60
+- 3
+- 249
+- 225
+- 183
+- 248
+- 126
+- 127
+- 246
+- 70
+- 53
+- 234
+- 108
+- 127
+- 211
+- 252
+- 39
+- 216
+- 72
+- 27
+- 105
+- 254
+- 51
+- 61
+- 24
+- 30
+- 169
+- 39
+- '...'
+video360p: []
+video180p: []
+---
+
+----------------------------------------------
+TOPIC: /gnss
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /gps
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /lf/lowstate
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/LowState
+Publisher count: 1
+Subscription count: 3
+
+[DATA] (timeout: 3s)
+head:
+- 254
+- 239
+level_flag: 0
+frame_reserve: 0
+sn:
+- 0
+- 0
+version:
+- 0
+- 0
+bandwidth: 0
+imu_state:
+  quaternion:
+  - 0.9998524188995361
+  - -0.005176983308047056
+  - -0.0059629641473293304
+  - -0.015259461477398872
+  gyroscope:
+  - 0.004261057358235121
+  - 0.0010652643395587802
+  - 0.0
+  accelerometer:
+  - 0.09068039059638977
+  - -0.1032499447464943
+  - 9.804255485534668
+  rpy:
+  - -0.010171372443437576
+  - -0.012082458473742008
+  - -0.030459610745310783
+  temperature: 79
+motor_state:
+- mode: 10
+  q: -0.6043989658355713
+  dq: -0.0001073640160029754
+  ddq: 0.0
+  tau_est: 0.75
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 5
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: 1.0860426425933838
+  dq: 9.69625252764672e-05
+  ddq: 0.0
+  tau_est: -0.375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: -2.6878111362457275
+  dq: -7.266092870850116e-05
+  ddq: 0.0
+  tau_est: 0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: 0.6116370558738708
+  dq: 0.0006458954885601997
+  ddq: 0.0
+  tau_est: 0.9375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: 1.0834540128707886
+  dq: 1.5644425729988143e-05
+  ddq: 0.0
+  tau_est: -0.84375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: -2.6791186332702637
+  dq: -2.2187732611200772e-05
+  ddq: 0.0
+  tau_est: -0.375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: -0.6026889681816101
+  dq: 0.00019548152340576053
+  ddq: 0.0
+  tau_est: -0.75
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 30
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: 1.0851478576660156
+  dq: -0.00029850457212887704
+  ddq: 0.0
+  tau_est: -0.375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: -2.696774959564209
+  dq: 0.00046534472494386137
+  ddq: 0.0
+  tau_est: 0.5625
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: 0.5938687324523926
+  dq: -0.00026442058151587844
+  ddq: 0.0
+  tau_est: -0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 30
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: 1.082958459854126
+  dq: 0.0002286286180606112
+  ddq: 0.0
+  tau_est: -0.28125
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 10
+  q: -2.692413330078125
+  dq: -0.00019368207722436637
+  ddq: 0.0
+  tau_est: -0.84375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 1
+  q: -0.13042522966861725
+  dq: -0.02265571430325508
+  ddq: 0.0
+  tau_est: 0.1354166716337204
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 29
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 1
+  q: -0.3481767773628235
+  dq: 0.031151609495282173
+  ddq: 0.0
+  tau_est: -0.1015625
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 28
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 1
+  q: -0.14416468143463135
+  dq: 0.016991786658763885
+  ddq: 0.0
+  tau_est: 0.1354166716337204
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 28
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 1
+  q: -0.13608917593955994
+  dq: -0.01132785715162754
+  ddq: 0.0
+  tau_est: -0.1692708432674408
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 29
+  lost: 0
+  reserve:
+  - 0
+  - 552
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+bms_state:
+  version_high: 1
+  version_low: 27
+  status: 8
+  soc: 69
+  current: -3209
+  cycle: 0
+  bq_ntc:
+  - 28
+  - 28
+  mcu_ntc:
+  - 29
+  - 30
+  cell_vol:
+  - 3821
+  - 3824
+  - 3824
+  - 3824
+  - 3824
+  - 3824
+  - 3820
+  - 3822
+  - 3824
+  - 3825
+  - 3822
+  - 3822
+  - 3821
+  - 3820
+  - 0
+foot_force:
+- 490
+- 497
+- 504
+- 522
+foot_force_est:
+- 0
+- 0
+- 0
+- 0
+tick: 5728320
+wireless_remote:
+- 85
+- 81
+- 0
+- 0
+- 0
+- 0
+- 0
+- 128
+- 0
+- 0
+- 0
+- 128
+- 0
+- 0
+- 0
+- 128
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 1
+- 128
+bit_flag: 4
+adc_reel: 0.0
+temperature_ntc1: 40
+temperature_ntc2: 31
+power_v: 53.518001556396484
+power_a: 0.29013538360595703
+fan_frequency:
+- 0
+- 0
+- 0
+- 0
+reserve: 0
+crc: 3409250744
+---
+
+----------------------------------------------
+TOPIC: /lf/odommodestate
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/SportModeState
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+stamp:
+  sec: 0
+  nanosec: 0
+error_code: 0
+imu_state:
+  quaternion:
+  - 0.9997292757034302
+  - -0.0050158207304775715
+  - -0.005800088867545128
+  - -0.021968118846416473
+  gyroscope:
+  - 0.0
+  - 0.0
+  - 0.0
+  accelerometer:
+  - 0.0
+  - 0.0
+  - 0.0
+  rpy:
+  - -0.009774929843842983
+  - -0.0118176881223917
+  - -0.0438833050429821
+  temperature: 0
+mode: 0
+progress: 0.0
+gait_type: 0
+foot_raise_height: 0.0
+position:
+- -0.06604070961475372
+- -0.01653270237147808
+- 0.17919228971004486
+body_height: 0.0
+velocity:
+- -3.5636849027298467e-10
+- 5.824436488666151e-10
+- -2.2235603580611496e-08
+yaw_speed: 0.0010652643395587802
+range_obstacle:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_force:
+- 0
+- 0
+- 0
+- 0
+foot_position_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_speed_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+---
+
+----------------------------------------------
+TOPIC: /lf/sportmodestate
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/SportModeState
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+stamp:
+  sec: 0
+  nanosec: 0
+error_code: 0
+imu_state:
+  quaternion:
+  - 0.9998545050621033
+  - -0.004779529757797718
+  - -0.0060248468071222305
+  - -0.015229744836688042
+  gyroscope:
+  - 0.0021305286791175604
+  - 0.0010652643395587802
+  - 0.0
+  accelerometer:
+  - 0.10773907601833344
+  - -0.11133038252592087
+  - 9.805153846740723
+  rpy:
+  - -0.009374989196658134
+  - -0.012193825095891953
+  - -0.030404405668377876
+  temperature: 0
+mode: 7
+progress: 0.0
+gait_type: 0
+foot_raise_height: 0.0
+position:
+- -0.03089996427297592
+- -0.05327457934617996
+- 0.17290769517421722
+body_height: 0.0
+velocity:
+- 0.0
+- 0.0
+- 0.0
+yaw_speed: 0.0
+range_obstacle:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_force:
+- 0
+- 0
+- 0
+- 0
+foot_position_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_speed_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+---
+
+----------------------------------------------
+TOPIC: /lio_sam_ros2/mapping/cloud_registered
+----------------------------------------------
+[INFO]
+Type: sensor_msgs/msg/PointCloud2
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /lio_sam_ros2/mapping/odometry
+----------------------------------------------
+[INFO]
+Type: nav_msgs/msg/Odometry
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /lio_sam_ros2/mapping/re_location_odometry
+----------------------------------------------
+[INFO]
+Type: nav_msgs/msg/Odometry
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /lowcmd
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/LowCmd
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+head:
+- 254
+- 239
+level_flag: 255
+frame_reserve: 0
+sn:
+- 0
+- 0
+version:
+- 0
+- 0
+bandwidth: 0
+motor_cmd:
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 10
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 15.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 5.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 5.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 5.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 0.0
+  dq: 0.0
+  tau: 0.0
+  kp: 0.0
+  kd: 5.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 2146000000.0
+  dq: 16000.0
+  tau: 0.0
+  kp: 0.0
+  kd: 0.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 2146000000.0
+  dq: 16000.0
+  tau: 0.0
+  kp: 0.0
+  kd: 0.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 2146000000.0
+  dq: 16000.0
+  tau: 0.0
+  kp: 0.0
+  kd: 0.0
+  reserve:
+  - 0
+  - 0
+  - 0
+- mode: 1
+  q: 2146000000.0
+  dq: 16000.0
+  tau: 0.0
+  kp: 0.0
+  kd: 0.0
+  reserve:
+  - 0
+  - 0
+  - 0
+bms_cmd:
+  'off': 0
+  reserve:
+  - 0
+  - 0
+  - 0
+wireless_remote:
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+led:
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+fan:
+- 0
+- 0
+gpio: 0
+reserve: 0
+crc: 1919119630
+---
+
+----------------------------------------------
+TOPIC: /lowstate
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/LowState
+Publisher count: 1
+Subscription count: 3
+
+[DATA] (timeout: 3s)
+head:
+- 254
+- 239
+level_flag: 0
+frame_reserve: 0
+sn:
+- 0
+- 0
+version:
+- 0
+- 0
+bandwidth: 0
+imu_state:
+  quaternion:
+  - 0.9998525977134705
+  - -0.004904375411570072
+  - -0.005987158045172691
+  - -0.015329486690461636
+  gyroscope:
+  - 0.0021305286791175604
+  - 0.0010652643395587802
+  - 0.0021305286791175604
+  accelerometer:
+  - 0.0933738648891449
+  - -0.10235211998224258
+  - 9.736919403076172
+  rpy:
+  - -0.009624600410461426
+  - -0.012123211286962032
+  - -0.030602753162384033
+  temperature: 79
+motor_state:
+- mode: 10
+  q: -0.6044149398803711
+  dq: -0.00026979768881574273
+  ddq: 0.0
+  tau_est: 1.03125
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 5
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: 1.0860426425933838
+  dq: 0.0002101198915624991
+  ddq: 0.0
+  tau_est: 0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: -2.6877951622009277
+  dq: 0.0002576873521320522
+  ddq: 0.0
+  tau_est: 0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: 0.611621081829071
+  dq: -0.0003584083169698715
+  ddq: 0.0
+  tau_est: -0.65625
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: 1.0834540128707886
+  dq: -0.0001705804606899619
+  ddq: 0.0
+  tau_est: 0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: -2.6791346073150635
+  dq: -0.0005038546514697373
+  ddq: 0.0
+  tau_est: 0.65625
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 32
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: -0.6026889681816101
+  dq: 0.0002135561517206952
+  ddq: 0.0
+  tau_est: -0.28125
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 30
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: 1.0851478576660156
+  dq: 0.0001749976072460413
+  ddq: 0.0
+  tau_est: -0.28125
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: -2.696774959564209
+  dq: 4.114271723665297e-05
+  ddq: 0.0
+  tau_est: -0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: 0.5939006805419922
+  dq: 0.0006478856084868312
+  ddq: 0.0
+  tau_est: -0.09375
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 30
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: 1.0829424858093262
+  dq: -0.0002526769821997732
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 10
+  q: -2.692397356033325
+  dq: -0.00042372572352178395
+  ddq: 0.0
+  tau_est: -0.75
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 31
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 1
+  q: -0.1303810030221939
+  dq: 0.031151609495282173
+  ddq: 0.0
+  tau_est: 0.1015625
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 29
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 1
+  q: -0.34819889068603516
+  dq: -0.02265571430325508
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 28
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 1
+  q: -0.1441868543624878
+  dq: 0.00566392857581377
+  ddq: 0.0
+  tau_est: 0.203125
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 28
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 1
+  q: -0.13608917593955994
+  dq: -0.02265571430325508
+  ddq: 0.0
+  tau_est: -0.0677083358168602
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 29
+  lost: 0
+  reserve:
+  - 0
+  - 551
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+- mode: 0
+  q: 0.0
+  dq: 0.0
+  ddq: 0.0
+  tau_est: 0.0
+  q_raw: 0.0
+  dq_raw: 0.0
+  ddq_raw: 0.0
+  temperature: 0
+  lost: 0
+  reserve:
+  - 0
+  - 0
+bms_state:
+  version_high: 1
+  version_low: 27
+  status: 8
+  soc: 69
+  current: -3201
+  cycle: 0
+  bq_ntc:
+  - 28
+  - 28
+  mcu_ntc:
+  - 29
+  - 30
+  cell_vol:
+  - 3821
+  - 3823
+  - 3824
+  - 3823
+  - 3823
+  - 3823
+  - 3820
+  - 3820
+  - 3824
+  - 3824
+  - 3821
+  - 3821
+  - 3821
+  - 3819
+  - 0
+foot_force:
+- 496
+- 495
+- 503
+- 526
+foot_force_est:
+- 0
+- 0
+- 0
+- 0
+tick: 5743792
+wireless_remote:
+- 85
+- 81
+- 0
+- 0
+- 0
+- 0
+- 0
+- 128
+- 0
+- 0
+- 0
+- 128
+- 0
+- 0
+- 0
+- 128
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 0
+- 1
+- 128
+bit_flag: 4
+adc_reel: 0.0
+temperature_ntc1: 40
+temperature_ntc2: 31
+power_v: 53.507999420166016
+power_a: 0.29013538360595703
+fan_frequency:
+- 0
+- 0
+- 0
+- 0
+reserve: 0
+crc: 635763828
+---
+
+----------------------------------------------
+TOPIC: /multiplestate
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+data: '{}'
+---
+
+----------------------------------------------
+TOPIC: /odommodestate
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/SportModeState
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+stamp:
+  sec: 0
+  nanosec: 0
+error_code: 0
+imu_state:
+  quaternion:
+  - 0.9997255802154541
+  - -0.004563927184790373
+  - -0.005977830849587917
+  - -0.02218729257583618
+  gyroscope:
+  - 0.0
+  - 0.0
+  - 0.0
+  accelerometer:
+  - 0.0
+  - 0.0
+  - 0.0
+  rpy:
+  - -0.008860855363309383
+  - -0.012155202217400074
+  - -0.04432562738656998
+  temperature: 0
+mode: 0
+progress: 0.0
+gait_type: 0
+foot_raise_height: 0.0
+position:
+- -0.06607557833194733
+- -0.016602657735347748
+- 0.17918860912322998
+body_height: 0.0
+velocity:
+- 2.5652635571304927e-09
+- -2.8641635729798054e-09
+- 2.708838451326301e-07
+yaw_speed: 0.0021305286791175604
+range_obstacle:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_force:
+- 0
+- 0
+- 0
+- 0
+foot_position_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_speed_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+---
+
+----------------------------------------------
+TOPIC: /panorama_videohub/videostream
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/Go2FrontVideoData
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /parameter_events
+----------------------------------------------
+[INFO]
+Type: rcl_interfaces/msg/ParameterEvent
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /pctoimage_local
+----------------------------------------------
+[INFO]
+Type: unitree_interfaces/msg/PcToImage
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+The message type 'unitree_interfaces/msg/PcToImage' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /public_network_status
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 2
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /qt_add_edge
+----------------------------------------------
+[INFO]
+Type: unitree_interfaces/msg/QtEdge
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+The message type 'unitree_interfaces/msg/QtEdge' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /qt_add_node
+----------------------------------------------
+[INFO]
+Type: unitree_interfaces/msg/QtNode
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+The message type 'unitree_interfaces/msg/QtNode' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /qt_command
+----------------------------------------------
+[INFO]
+Type: unitree_interfaces/msg/QtCommand
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+The message type 'unitree_interfaces/msg/QtCommand' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /qt_notice
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /query_result_edge
+----------------------------------------------
+[INFO]
+Type: unitree_interfaces/msg/QtEdge
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+The message type 'unitree_interfaces/msg/QtEdge' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /query_result_node
+----------------------------------------------
+[INFO]
+Type: unitree_interfaces/msg/QtNode
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+The message type 'unitree_interfaces/msg/QtNode' is invalid
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /rosout
+----------------------------------------------
+[INFO]
+Type: rcl_interfaces/msg/Log
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /rtc/ext_service
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /rtc_status
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /selftest
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /servicestate
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /servicestateactivate
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /slam_info
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 2
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /sportmodestate
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/SportModeState
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+stamp:
+  sec: 0
+  nanosec: 0
+error_code: 0
+imu_state:
+  quaternion:
+  - 0.9998547434806824
+  - -0.005087494384497404
+  - -0.005852109286934137
+  - -0.01517326571047306
+  gyroscope:
+  - 0.004261057358235121
+  - -0.0010652643395587802
+  - 0.0021305286791175604
+  accelerometer:
+  - 0.14903905987739563
+  - -0.09157821536064148
+  - 9.813234329223633
+  rpy:
+  - -0.009996789507567883
+  - -0.011857184581458569
+  - -0.030289342626929283
+  temperature: 0
+mode: 7
+progress: 0.0
+gait_type: 0
+foot_raise_height: 0.0
+position:
+- -0.03089996427297592
+- -0.05327457934617996
+- 0.17290769517421722
+body_height: 0.0
+velocity:
+- 0.0
+- 0.0
+- 0.0
+yaw_speed: 0.0
+range_obstacle:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_force:
+- 0
+- 0
+- 0
+- 0
+foot_position_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+foot_speed_body:
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+- 0.0
+---
+
+----------------------------------------------
+TOPIC: /unitree/slam_mapping/points
+----------------------------------------------
+[INFO]
+Type: sensor_msgs/msg/PointCloud2
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /unitree/slam_relocation/points
+----------------------------------------------
+[INFO]
+Type: sensor_msgs/msg/PointCloud2
+Publisher count: 0
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /videohub/inner
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 1
+Subscription count: 0
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /webrtcreq
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 2
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /webrtcres
+----------------------------------------------
+[INFO]
+Type: std_msgs/msg/String
+Publisher count: 0
+Subscription count: 2
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+----------------------------------------------
+TOPIC: /wirelesscontroller
+----------------------------------------------
+[INFO]
+Type: unitree_go/msg/WirelessController
+Publisher count: 1
+Subscription count: 1
+
+[DATA] (timeout: 3s)
+(no data received within 3s)
+
+==============================================
+Check completed: Tue Dec  9 04:56:37 PM CET 2025
+==============================================

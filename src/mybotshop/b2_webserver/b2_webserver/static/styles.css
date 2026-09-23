@@ -1,0 +1,1291 @@
+/*
+Software License Agreement (BSD)
+
+@author    Salman Omar Sohail <support@mybotshop.de>
+@copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+*/
+
+/* --------------------------------------------- Background video/GIF covers the whole page */
+:root {
+    --project-text-color: #fff;
+    --project-color: #3d8a3d;
+    --project-dark-color: #34a73460;
+    --project-light-color: #6edf6e;
+    --project-white-color: #ffffff;
+    --project-config-color: #CD7F32;
+    --project-transparent-background: rgba(0, 0, 0, 0.8);
+    --project-hyperlink-inactive-color: #01af70;
+    --project-hyperlink-active-color: #51b851;
+    --project-error-color: #8d2222;
+}
+
+/* --------------------------------------------- General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --------------------------------------------- Font Import */
+@font-face {
+    font-family: 'Quicksand';
+    src: url('fonts/quicksand/Quicksand-Regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'QuicksandBold';
+    src: url('fonts/quicksand/Quicksand-Bold.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* ---------------------------------------------Headings */
+h2 {
+    font-style: italic;
+    color: var(--project-white-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h3 {
+    font-size: 0.9rem;
+    color: var(--project-white-color);
+    text-align: center;
+    padding: 15px;
+    background-color: #0000004f;
+    border-radius: 60px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.heading-line {
+    border: 0;
+    border-top: 1px solid var(--project-white-color);
+    margin: 10px 0;
+    width: 100%;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* --------------------------------------------- Body Styling */
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-size: cover;
+    color: var(--project-text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* --------------------------------------------- Background Media */
+.background-media {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.background-media video,
+.background-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+}
+
+/* --------------------------------------------- Main Container */
+.container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    overflow: hidden;
+}
+
+/* --------------------------------------------- Panel Container */
+.panel-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+    /* max-width: 1600px; */
+    justify-content: space-between;
+}
+
+.model-viewer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* --------------------------------------------- Individual Panels */
+.panel {
+    background: var(--project-transparent-background);
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    min-width: 300px;
+    min-height: calc(100vh - 95px);
+    /* min-height: 800px; */
+    text-align: left;
+}
+
+.panel p {
+    margin-bottom: 15px;
+}
+
+.panel-container-login {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    margin-top: 10px;
+}
+
+.panellogin {
+    background: var(--project-transparent-background);
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    max-width: 1200px;
+    text-align: left;
+}
+
+.panel-small {
+    background: var(--project-transparent-background);
+    padding: 20px;
+    border-radius: 10px;
+    flex: 1;
+    max-width: 250px;
+    min-height: 725px;
+    text-align: left;
+}
+/* --------------------------------------------- Footer Styling */
+.footer {
+    width: 100%;
+    background-color: var(--project-transparent-background);
+    color: var(--project-white-color);
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 0;
+    position: relative;
+}
+
+/* --------------------------------------------- Link Styling inside footer */
+.footer a {
+    color: var(--project-hyperlink-active-color);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: var(--project-hyperlink-inactive-color);
+    text-decoration: underline;
+}
+
+/* --------------------------------------------- Controls + Terminal*/
+.control {
+    margin-bottom: 25px;
+}
+
+.control label {
+    color: var(--project-white-color);
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.control input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    color: var(--project-white-color) !important;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    border: 1.5px solid #6edf6e;
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(52, 167, 52, 0.2);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.control input::placeholder {
+    color: #90d090;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+.control input:focus {
+    outline: none;
+    border-color: #8ff78f;
+    box-shadow: 0 6px 12px rgba(52, 167, 52, 0.3);
+
+}
+
+.dual-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+}
+
+.dual-block {
+    flex: 1;
+    min-width: 250px;
+}
+
+.dual-right-block {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.dual-block h3,
+.dual-right-block h3 {
+    margin-top: 5px;
+}
+
+/* --------------------------------------------- Login Form */
+form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-group label {
+    font-size: 18px;
+    font-weight: bolder;
+    color: var(--project-color-white);
+}
+
+.form-group input {
+    width: auto;
+    padding: 5px;
+    margin-left: 8px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: var(--project-color);
+}
+
+/* --------------------------------------------- Response Message */
+#responseMessage {
+    margin-top: 20px;
+    font-size: 1.0rem;
+}
+
+/* --------------------------------------------- Mobile Specific Adjustments */
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .panel {
+        min-width: 100%;
+        height: auto;
+    }
+}
+
+/* --------------------------------------------- Top Navigation Bar */
+.top-nav {
+    background-color: var(--project-transparent-background);
+    font-family: 'Quicksand', sans-serif;
+    font-size: larger;
+    font-style: italic;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+
+.top-nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.top-nav ul li {
+    position: relative;
+    z-index: 1000;
+}
+
+.top-nav ul li a {
+    display: block;
+    color: var(--project-white-color);
+    text-align: center;
+    padding: 12px 18px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.top-nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: var(--project-white-color);
+}
+
+/* --------------------------------------------- Dropdown Styling */
+.top-nav .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--project-white-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    min-width: 150px;
+    z-index: 10;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.top-nav .dropdown-menu li {
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.top-nav .dropdown-menu li a {
+    text-decoration: none;
+    color: #333;
+    padding: 10px;
+    display: block;
+    transition: background 0.3s;
+    border-radius: 5px;
+}
+
+.top-nav .dropdown-menu li a:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.top-nav li:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --------------------------------------------- Right-aligned logos */
+.top-nav ul li.right {
+    margin-left: auto;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 40px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* --------------------------------------------- Text Styling for System */
+.js-text {
+    color: var(--project-light-color);
+}
+
+/* --------------------------------------------- Button Styling */
+button {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    z-index: 500;
+
+    padding: 1.0em 2em;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    font-weight: 800;
+    color: var(--project-white-color);
+    background-color: var(--project-color);
+    border: none;
+    border-radius: 30px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    outline: none;
+    transform-origin: center;
+}
+
+button:hover {
+    background-color: #FF8C42;
+    color: #F8FAFC;
+    box-shadow: 0px 12px 20px rgba(255, 140, 66, 0.3);
+    transform: translateY(-4px) scale(1.03);
+}
+
+button:active {
+    background-color: #E76F00;
+    transform: translateY(1px) scale(0.97);
+    box-shadow: 0px 4px 8px rgba(231, 111, 0, 0.25);
+}
+
+.mini-button {
+    border: none;
+    border-radius: 25px;
+    padding: 4px 6px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.mini-button-r {
+    background-color: var(--project-error-color);
+    color: var(--project-white-color);
+    border: none;
+    border-radius: 25px;
+    padding: 4px 6px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.control-block-btn {
+    background-color: var(--project-color);
+
+}
+
+.control-block-buttons-canvas {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.control-block-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.div-btns {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.deactivate-btn {
+    background-color: var(--project-error-color);
+    color: var(--project-white-color);
+}
+
+.full-width-btn {
+    width: 50%;
+    border-radius: 0%;
+}
+
+.full-width-btn-error {
+    width: 50%;
+    background: var(--project-error-color);
+    border-radius: 0%;
+
+}
+
+/* --------------------------------------------- Map */
+#map {
+    min-height: calc(100vh - 125px);
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-panel {
+    padding: 20px;
+    min-height: calc(100vh - 95px);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-controls {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 500;
+    transform: scale(0.85);
+    transform-origin: bottom left;
+
+    display: flex;
+    gap: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.map-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.map-indoor-controls {
+    position: absolute;
+    overflow: hidden;
+    min-width: 600px;
+    top: 0px;
+    left: 0px;
+    transform: scale(1.0);
+    transform-origin: top left;
+
+    display: flex;
+    gap: 30px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.map-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.map-control-group h4 {
+    margin: 0;
+    color: var(--project-text-color);
+    font-size: 1rem;
+    text-align: center;
+}
+
+#map:hover {
+    /* cursor: url('media/icons/navigation.png'), auto; */
+    cursor: crosshair;
+}
+
+.coords-display {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    padding: 6px 10px;
+    background: var(--project-transparent-background);
+    color: var(--project-text-color);
+    font-size: 13px;
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 500;
+}
+/* --------------------------------------------- Joystick */
+.dual-joystick-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.joystick-container {
+    width: 230px;
+    height: 230px;
+    position: relative;
+    background-color: #000000ce;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 80%;
+    border: 1.5px solid #6edf6e;
+    border-color: rgb(6, 236, 6);
+    box-sizing: border-box;
+    box-shadow: 0 4px 8px rgba(6, 236, 6, 0.2);
+    animation: pulse-border 1s infinite alternate;
+}
+
+@keyframes pulse-border {
+    from {
+        border-color: rgb(6, 236, 6);
+        box-shadow: 0 4px 8px rgba(6, 236, 6, 0.2);
+        border-width: 1.5px;
+    }
+
+    to {
+        border-color: rgb(173, 255, 47);
+        box-shadow: 0 0 15px rgba(173, 255, 47, 0.5);
+        border-width: 2.5px;
+    }
+}
+
+#joystick1,
+#joystick2 {
+    width: 100%;
+    height: 100%;
+    background: rgba(73, 218, 104, 0.2);
+    border-radius: 50%;
+    position: relative;
+}
+
+.joystick-label {
+    position: absolute;
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--project-text-color);
+    text-shadow: 1px 1px 3px black;
+}
+
+.top {
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.bottom {
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.left {
+    left: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.right {
+    right: -50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* --------------------------------------------- Joystick Slider */
+.sliders-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.slider {
+    width: 100%;
+    margin: 12px 0;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 8px;
+    background: var(--project-white-color);
+    border-radius: 5px;
+}
+
+.slider-block {
+    flex: 1;
+    min-width: 200px;
+}
+
+.slider-block label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.slider-block span {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--project-color);
+    font-weight: bold;
+}
+
+.slider-label-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.slider-label-row span {
+    color: var(--project-color);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 30px;
+    border-radius: 20%;
+    background: var(--project-color);
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--project-color);
+    cursor: pointer;
+}
+
+.slider:hover {
+    background: var(--project-light-color);
+}
+
+.slider-value {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--project-color);
+}
+
+/* --------------------------------------------- Table */
+table {
+    width: 100%;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+}
+
+tr:hover {
+    background-color: var(--project-dark-color);
+}
+
+th {
+    padding: 8px;
+    font-size: 14px;
+    color: var(--project-color);
+    background-color: #ffffff0a;
+    text-align: left;
+    border-radius: 2px;
+}
+
+td {
+    padding: 4px;
+}
+
+table a {
+    color: var(--project-color);
+    text-decoration: none;
+}
+
+table a:hover {
+    color: var(--project-hyperlink-active-color);
+    text-decoration: underline;
+}
+
+/* --------------------------------------------- Block Quote */
+blockquote {
+    display: block;
+    background-color: #0000004f;
+    border-left: 5px solid var(--project-color);
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    line-height: 2;
+    font-size: small;
+}
+
+blockquote strong {
+    font-size: 1.2em;
+    color: var(--project-color);
+}
+
+.warningblockquote {
+    display: block;
+    background-color: #0000004f;
+    border-left: 5px solid var(--project-error-color);
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    line-height: 2;
+    font-size: small;
+
+}
+
+.warningblockquote strong {
+    font-size: 1.2em;
+    color: var(--project-error-color);
+}
+
+.noteblockquote {
+    display: block;
+    background-color: #0000004f;
+    border-left: 5px solid rgb(182, 159, 59);
+    padding: 10px 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+    line-height: 2;
+    font-size: small;
+
+}
+
+.noteblockquote strong {
+    font-size: 1.2em;
+    color: rgb(182, 159, 59);
+}
+
+/* --------------------------------------------- Loading */
+.loading {
+    float: right;
+}
+
+.loading svg polyline {
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+    fill: none;
+    stroke: var(--project-color);
+}
+
+.loading svg polyline#front {
+    fill: none;
+    stroke: var(--project-light-color);
+    stroke-dasharray: 48, 144;
+    stroke-dashoffset: 192;
+    animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+    72.5% {
+        opacity: 0;
+    }
+
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* --------------------------------------------- Map Loading */
+/* From Uiverse.io by mrhyddenn */
+.loading_scanner {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: 25px 25px 75px rgba(0, 0, 0, 0.55);
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.loading_scanner::before {
+    content: '';
+    position: absolute;
+    width: 110px;
+    height: 110px;
+    top: 20px;
+    left: 20px;
+    background: transparent;
+    border: 1px dashed #444;
+    border-radius: 50%;
+    box-shadow: inset -5px -5px 25px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 35px rgba(0, 0, 0, 0.25);
+}
+
+.loading_scanner::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed #444;
+    box-shadow: inset -5px -5px 25px rgba(0, 0, 0, 0.25),
+        inset 5px 5px 35px rgba(0, 0, 0, 0.25);
+}
+
+.loading_scanner span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    background: transparent;
+    transform-origin: top left;
+    animation: radar81 2s linear infinite;
+    border-top: 1px dashed #fff;
+}
+
+.loading_scanner span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: seagreen;
+    transform-origin: top left;
+    transform: rotate(-55deg);
+    filter: blur(30px) drop-shadow(20px 20px 20px seagreen);
+}
+
+@keyframes radar81 {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* --------------------------------------------- 3D Model Hotspots */
+.hotspot {
+    position: relative;
+    pointer-events: auto;
+}
+
+.hotspot-point {
+    width: 8px;
+    height: 8px;
+    background-color: var(--project-color);
+    border-radius: 50%;
+}
+
+.hotspot-tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    top: 20px;
+    left: 20px;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear;
+}
+
+.hotspot:hover .hotspot-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* --------------------------------------------- Battery Status */
+.battery-status-container {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 30px;
+}
+
+.battery-visual {
+    position: relative;
+    width: 70px;
+    height: 130px;
+    flex-shrink: 0;
+}
+
+.battery-details {
+    margin-top: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.25);
+    padding: 15px;
+    border-radius: 30px;
+    flex-grow: 1;
+}
+
+.battery-body {
+    width: 100%;
+    height: 85%;
+    border: 3px solid var(--project-white-color);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.battery-terminal {
+    width: 40%;
+    height: 8%;
+    background-color: var(--project-white-color);
+    border-radius: 4px 4px 0 0;
+    position: absolute;
+    top: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.battery-level {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--project-color);
+    transition: height 1s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.battery-percentage {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.detail-item {
+    margin-bottom: 8px;
+}
+
+.detail-item:last-child {
+    margin-bottom: 0;
+}
+
+.detail-label {
+    font-size: 12px;
+    font-weight: bold;
+    color: var(--project-color);
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--project-white-color);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.charging {
+    animation: pulse 2s infinite;
+}
+
+/* Add this to your existing CSS */
+.battery-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    opacity: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50% 50% 0 0;
+    transform: scale(1.2);
+    animation: wave 2s infinite ease-in-out;
+}
+
+.battery-wave:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+.battery-wave:nth-child(3) {
+    animation-delay: 1s;
+}
+
+@keyframes wave {
+    0% {
+        height: 0%;
+        opacity: 0.2;
+    }
+
+    50% {
+        height: 30%;
+        opacity: 0.3;
+    }
+
+    100% {
+        height: 0%;
+        opacity: 0.2;
+    }
+}
+
+/* Enhance the charging animation */
+.charging {
+    animation: pulse 2s infinite;
+}
+
+.charging .battery-wave {
+    display: block;
+}
+
+/* --------------------------------------------- VNC Display */
+.vnc-container {
+    width: 100%;
+    height: calc(100vh - 95px);
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#vnc-screen {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+#vnc-screen canvas {
+    transform-origin: top left;
+}
+
+#vnc-status {
+    padding: 8px;
+    background-color: var(--project-transparent-background);
+    color: white;
+    font-family: monospace;
+    text-align: center;
+    font-size: xx-large;
+}
+
+.vnc-controls {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.vnc-controls button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#vnc-connect-btn {
+    background-color: var(--project-color);
+    color: white;
+}
+
+#vnc-connect-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#vnc-disconnect-btn {
+    background-color: var(--project-error-color);
+    color: white;
+}
+
+#vnc-disconnect-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#vnc-password,
+#vnc-host,
+#vnc-port {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    flex-grow: 1;
+}
+
+/* --------------------------------------------- Graph Display */
+.graphs-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.graph-item {
+    background: var(--project-transparent-background);
+    border-radius: 10px;
+    padding: 30px;
+    border: 1px solid rgba(52, 167, 52, 0.2);
+}
+
+.graph-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #FFFF;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.graph-canvas {
+    width: 100% !important;
+    height: 250px !important;
+}
+
+/* --------------------------------------------- Warning popup */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #e9e0e0;
+    margin: 15% auto;
+    padding: 40px;
+    border: 2px solid var(--project-error-color);
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    line-height: 1.6;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    position: relative;
+    color: var(--project-error-color);
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    top: 10px;
+}
+
+.close-button:hover {
+    color: #000;
+}

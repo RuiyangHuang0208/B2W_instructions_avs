@@ -1,0 +1,166 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+# Software License Agreement (BSD)
+#
+# @author    Salman Omar Sohail <support@mybotshop.de>
+# @copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# * Redistributions of source code must retain the above copyright notice,
+#   this list of conditions and the following disclaimer.
+# * Redistributions in binary form must reproduce the above copyright notice,
+#   this list of conditions and the following disclaimer in the documentation
+#   and/or other materials provided with the distribution.
+# * Neither the name of MYBOTSHOP GmbH nor the names of its contributors
+#   may be used to endorse or promote products derived from this software
+#   without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+# POSSIBILITY OF SUCH DAMAGE.
+
+# Redistribution and use in source and binary forms, with or without
+# modification, is not permitted without the express permission
+# of MYBOTSHOP GmbH.
+
+import serial
+import rclpy
+import time
+
+from rclpy.node import Node
+from b2_srvs.srv import B2Modes
+from std_msgs.msg import String
+
+class SerialController(Node):
+    def __init__(self):
+        super().__init__('serial_driver')
+        self.get_logger().info(f'{self.colorize("Initializing ROS2 Serial Publisher","yellow")}')
+
+        # Parameters Declaration
+        self.declare_parameters(namespace='', parameters=[('baud_rate', 57600),
+                                                          ('connection_port', '/dev/ttyUSB0')])                                                   
+        self.param_baudrate = self.get_parameter('baud_rate').value
+        self.param_connection_port = self.get_parameter('connection_port').value
+
+        self.get_logger().info(f'{self.colorize(f"Serial port: {self.param_connection_port}","blue")}')
+        self.get_logger().info(f'{self.colorize(f"Baudrate: {self.param_baudrate}","blue")}')
+
+        # Serial Initialization
+        self.arduino = serial.Serial(port=self.param_connection_port, baudrate=self.param_baudrate, timeout=1)
+
+        # Service Server
+        self.srv_relay = self.create_service(B2Modes, 'rig/control', self.service_callback_activation)
+
+        # Publishers
+        self.publisher_serial_status = self.create_publisher(String, 'rig/status', 10)
+
+        # Create a timer to publish data periodically
+        self.timer = self.create_timer(1.0, self.update_serial_status)
+        
+        # Print available commands
+        self.print_commands()
+        
+        # Node Initialization
+        self.get_logger().info(f'{self.colorize("Serial Driver is ready to receive commands","green")}')
+    
+    def service_callback_activation(self, request, response):
+        if not self.arduino.is_open:
+            self.get_logger().error("Attempted to write to a closed serial port.")
+            response.reason = 'Serial port is closed.'
+            response.success = False
+            return response
+        if request.request_data == 'vacuum_on':
+            self.get_logger().info(f'{self.colorize("Sending command to Arduino: relay_on","yellow")}')
+            self.arduino.write(bytes('relay_on' + '\n', 'utf-8'))
+            response.reason = f'Successfully sent command: {request.request_data}'
+            response.success = True
+        elif request.request_data == 'vacuum_off':
+            self.get_logger().info(f'{self.colorize("Sending command to Arduino: relay_off","yellow")}')
+            self.arduino.write(bytes('relay_off' + '\n', 'utf-8'))
+            response.reason = f'Successfully sent command: {request.request_data}'
+            response.success = True        
+        elif request.request_data == 'left_valve_open':
+            self.get_logger().info(f'{self.colorize("Sending command to Arduino: left_valve_open","yellow")}')
+            self.arduino.write(bytes('actuator_02_on' + '\n', 'utf-8'))
+            response.reason = f'Successfully sent command: {request.request_data}'
+            response.success = True
+        elif request.request_data == 'left_valve_close':
+            self.get_logger().info(f'{self.colorize("Sending command to Arduino: left_valve_close","yellow")}')
+            self.arduino.write(bytes('actuator_02_off' + '\n', 'utf-8'))
+            response.reason = f'Successfully sent command: {request.request_data}'
+            response.success = True
+        elif request.request_data == 'right_valve_open':
+            self.get_logger().info(f'{self.colorize("Sending command to Arduino: right_valve_open","yellow")}')
+            self.arduino.write(bytes('actuator_01_on' + '\n', 'utf-8'))
+            response.reason = f'Successfully sent command: {request.request_data}'
+            response.success = True
+        elif request.request_data == 'right_valve_close':   
+            self.get_logger().info(f'{self.colorize("Sending command to Arduino: right_valve_close","yellow")}')
+            self.arduino.write(bytes('actuator_01_off' + '\n', 'utf-8'))
+            response.reason = f'Successfully sent command: {request.request_data}'
+            response.success = True
+        else:
+            response.reason = f'Command not recognized: {request.request_data}'
+            response.success = False
+        
+        return response
+    
+    def print_commands(self):
+        self.get_logger().info(f'{self.colorize("Commands:","blue")}')
+        self.get_logger().info(f'{self.colorize("vacuum_on","orange")}')
+        self.get_logger().info(f'{self.colorize("vacuum_off","orange")}')
+        self.get_logger().info(f'{self.colorize("left_valve_open","orange")}')
+        self.get_logger().info(f'{self.colorize("left_valve_close","orange")}')
+        self.get_logger().info(f'{self.colorize("right_valve_open","orange")}')
+        self.get_logger().info(f'{self.colorize("right_valve_close","orange")}')
+    
+    def update_serial_status(self):
+        msg = String()
+        msg.data = self.arduino.readline().decode().strip()
+        self.publisher_serial_status.publish(msg)
+
+    def colorize(self, text, color):
+        color_codes = {
+            'green': '\033[92m',
+            'yellow': '\033[93m',
+            'orange': '\033[38;5;208m', 
+            'blue': '\033[94m',
+            'red': '\033[91m'
+        }
+        return color_codes[color] + text + '\033[0m'
+   
+    def destroy_node(self):
+        self.get_logger().info(f'{self.colorize("ROS2 Serial Publisher is shutting down","red")}')
+        # Add clean shutdown
+        if self.arduino.is_open:
+            self.arduino.close()
+            self.get_logger().info(f'{self.colorize("Serial port closed successfully","green")}')
+        else:
+            self.get_logger().info(f'{self.colorize("Serial port was already closed","red")}')
+        self.get_logger().info(f'{self.colorize("Serial port closed successfully","green")}')
+        super().destroy_node() 
+
+def main(args=None):
+
+    rclpy.init(args=args)
+    serial_controller = SerialController()
+    try:
+        rclpy.spin(serial_controller)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        serial_controller.destroy_node()
+        rclpy.shutdown()
+
+if __name__ == '__main__':
+    main()

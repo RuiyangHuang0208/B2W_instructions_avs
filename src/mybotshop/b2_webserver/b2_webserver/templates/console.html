@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<!--
+Software License Agreement (BSD)
+
+@author    Salman Omar Sohail <support@mybotshop.de>
+@copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+-->
+
+<head>
+    <title>Console - Robot Webserver</title>
+    <link rel="icon" href="../static/media/logos/mbs_logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../static/css/all.min.css" type="text/css" /> <!-- Font Awesome -->
+    <script src="../static/scripts/common_script.js" defer></script>
+    <script src="../static/scripts/slider_script.js" defer></script>
+    <script src="../static/scripts/joystick_custom_script.js" defer></script>
+    <script src="../static/scripts/console_script.js" defer></script>
+</head>
+
+<body>
+    <div class="navbar"> </div>
+
+    <div class="container">
+
+        <!-- Background Media -->
+        <div class="background-media">
+            <img src="../static/media/wallpaper/wallpaper.webp" alt="Background GIF">
+        </div>
+
+        <!-- Main Panels -->
+        <div class="panel-container">
+
+            <!-- Info Panel -->
+            <div class="panel-small information-panel">
+                <h2>Info <span style="color: var(--project-color);">Panel</span></h2>
+                <hr class="heading-line">
+                <blockquote>
+                    <strong>Console Panel:</strong><br>
+                    <span><i class="fas fa-check"></i> Joysticks</span><br>
+                    <span><i class="fas fa-check"></i> Console Commands</span><br>
+                </blockquote>
+                <div class="noteblockquote">
+                    <strong>Joystick Panel</strong><br>
+                    <span>Hold to control the web joystick.</span><br>
+                </div>
+
+                <div class="warningblockquote">
+                    <strong>Warning:</strong><br>
+                    <span>• Click buttons once. </span><br>
+                    <span>• Do not spam click! </span><br>
+                    <span>• Execution may take +2 seconds to a minute to complete.</span>
+                    <br>
+                </div>
+            </div>
+            <!-- /Info Panel -->
+
+            <!-- Robot Control -->
+            <div class="panel information-panel">
+                <h2>Robot <span style="color: var(--project-color);">Control</span></h2>
+
+                <hr class="heading-line">
+                <h3>Joy<span style="color: var(--project-color);">stick</span> </h3>
+                <br>
+                <div class="dual-joystick-wrapper">
+                    <!-- First Joystick -->
+                    <div class="joystick-container">
+                        <div class="joystick-label top">+X</div>
+                        <div class="joystick-label left">+Yaw</div>
+                        <div id="joystick1"></div>
+                        <div class="joystick-label right">-Yaw</div>
+                        <div class="joystick-label bottom">-X</div>
+                    </div>
+
+                    <!-- Second Joystick -->
+                    <div class="joystick-container">
+                        <div class="joystick-label top">+Z</div>
+                        <div class="joystick-label left">+Y</div>
+                        <div id="joystick2"></div>
+                        <div class="joystick-label right">-Y</div>
+                        <div class="joystick-label bottom">-Z</div>
+                    </div>
+                </div>
+
+                <script src="../static/scripts/joystick_native_script.js"></script>
+                <br>
+
+                <h3>Webjoystick <span style="color: var(--project-color);">Speed</span> Control</h3>
+                <div class="sliders-container">
+                    <div class="slider-block">
+                        <div class="slider-label-row">
+                            <label for="slider1">Linear Velocity (X Y Z):</label>
+                            <span id="slider1-value">Not Set</span>
+                        </div>
+                        <input type="range" id="slider1" name="slider1" min="0" max="100" value="50" class="slider">
+                    </div>
+                    <div class="slider-block">
+                        <div class="slider-label-row">
+                            <label for="slider2">Angular Velocity (Yaw):</label>
+                            <span id="slider2-value">Not Set</span>
+                        </div>
+                        <input type="range" id="slider2" name="slider2" min="0" max="100" value="50" class="slider">
+                    </div>
+                </div>
+
+                <h3>Emergency <span style="color: var(--project-color);">Stop</span></h3>
+                <div class="div-btns">
+                    <button class="full-width-btn-error" onclick="webButton('e_stop')">
+                        <img src="../static/media/icons/emergency_stop.png" style="width:50px; height:50px;">
+                        <br>
+                        <span>TwistMux Engage</span>
+                    </button>
+                    <button class="full-width-btn" onclick="webButton('e_stop_release')">
+                        <img src="../static/media/icons/emergency_stop.png" style="width:50px; height:50px;">
+                        <br>
+                        <span>TwistMux Release</span>
+                    </button>
+
+                </div>
+            </div>
+            <!-- /Robot Control -->
+
+            <!-- Control Panel -->
+            <div class="panel control-panel">
+                <h2>Control <span style="color: var(--project-color);">Panel</span></h2>
+                <hr class="heading-line">
+
+                <div class="dual-container">
+                    <!-- Terminal Access Block -->
+                    <div class="dual-block">
+                        <h3>Terminal <span style="color: var(--project-color);">Access</span></h3>
+                        <div class="control">
+                            <input type="text" id="terminal_input" placeholder="Enter Terminal Command">
+                        </div>
+                        <div class="control-buttons">
+                            <button onclick="sendTerminalData()" class="transmission-btn">Transmit Data</button>
+                            <button style="background-color: var(--project-config-color);" onclick="sendClearData()"
+                                class="transmission-btn">Clear Web Log</button>
+                        </div>
+                    </div>
+
+                    <!-- Web Log Block -->
+                    <div class="dual-right-block">
+                        <h3>Web <span style="color: var(--project-color);">Log</span></h3>
+                        <span style="color: var(--project-light-color); font-weight: bolder;">Server Response:</span>
+                        <span id="responseMessage">Awaiting commands</span>
+                    </div>
+                </div>
+
+                <div class="dual-container">
+                    <!-- ROS2 Bag Recording -->
+                    <div class="dual-block">
+                        <h3>Data <span style="color: var(--project-color);">Recording</span></h3>
+                        <div class="control-buttons">
+                            <button onclick="webButton('record_bag')"> Record ROS2 BAG</button>
+                            <button style="background-color: var(--project-config-color);"
+                                onclick="webButton('stop_record_bag')"> Save ROS2 BAG</button>
+                        </div>
+                    </div>
+                    <!-- Audio Control Block -->
+                    <div class="dual-right-block">
+                        <h3>Audio <span style="color: var(--project-color);">Control</span></h3>
+                        <div class="control-buttons">
+                            <button onclick="webButton('audio_voice_test')"> Speak</button>
+                            <button onclick="webButton('audio_obstruction')"> Block</button>
+                            <button onclick="webButton('audio_car_horn')"> Beep</button>
+                            <button onclick="webButton('audio_boat_horn')"> Blast</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-container">
+                    <!-- Control Block 1 -->
+                    <div class="dual-block">
+                        <h3>Robot <span style="color: var(--project-color);">Control-1</span></h3>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="webButton('control_block_11')"> Rise </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_12')"> cb12 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_13')"> cb13 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_14')"> cb14 </button>
+                        </div>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="webButton('control_block_15')"> Sit </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_16')"> cb16 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_17')"> cb17 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_18')"> cb18 </button>
+                        </div>
+                    </div>
+                    <!-- Control Block 2 -->
+                    <div class="dual-right-block">
+                        <h3>Robot <span style="color: var(--project-color);">Vacuum</span></h3>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="webButton('control_block_21')"> On </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_22')"> LVO </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_23')"> RVO </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_24')"> cb24 </button>
+                        </div>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="webButton('control_block_25')"> Off </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_26')"> LVC </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_27')"> RVC </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_28')"> cb28 </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dual-container">
+                    <!-- Control Block 3 -->
+                    <div class="dual-block">
+                        <h3>Robot <span style="color: var(--project-color);">Control-3</span></h3>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="webButton('control_block_31')"> cb31 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_32')"> cb32 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_33')"> cb33 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_34')"> cb34 </button>
+                        </div>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="webButton('control_block_35')"> cb35 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_36')"> cb36 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_37')"> cb37 </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_38')"> cb38 </button>
+                        </div>
+                    </div>
+                    <!-- Control Block 4 -->
+                    <div class="dual-right-block">
+                        <h3>Robot <span style="color: var(--project-color);">Computer</span></h3>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="if(confirm('Reboot Robot Computer?')) webButton('control_block_41')"
+                                style="background-color: var(--project-error-color);">&nbsp; <i
+                                    class="fas fa-sync-alt">&nbsp;</i> </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_42')"
+                                style="background-color: var(--project-config-color);">&nbsp; <i
+                                    class="fas fa-download">&nbsp;</i> </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_43')"
+                                style="background-color: var(--project-config-color);">&nbsp; <i
+                                    class="fas fa-trash">&nbsp;</i> </button>
+                            <button class="control-block-btn" onclick="if(confirm('Reload Udev Rules?')) webButton('control_block_44')"
+                                style="background-color: var(--project-config-color);">&nbsp; <i
+                                    class="fas fa-microchip">&nbsp;</i> </button>
+                        </div>
+                        <div class="control-block-buttons-canvas">
+                            <button class="control-block-btn" onclick="if(confirm('Power Off Robot Computer?')) webButton('control_block_45')"
+                                style="background-color: var(--project-error-color);">&nbsp; <i
+                                    class="fas fa-power-off">&nbsp;</i> </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_46')"
+                                style="background-color: var(--project-config-color);">&nbsp; <i
+                                    class="fas fa-arrow-up">&nbsp;</i> </button>
+                            <button class="control-block-btn" onclick="if(confirm('Restrart Network Manager?')) webButton('control_block_47')"
+                                style="background-color: var(--project-config-color);">&nbsp; <i
+                                    class="fas fa-network-wired">&nbsp;</i> </button>
+                            <button class="control-block-btn" onclick="webButton('control_block_48')"
+                                style="background-color: var(--project-config-color);">&nbsp; <i
+                                    class="fas fa-memory">&nbsp;</i> </button>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- /Console Panel -->
+
+        </div>
+        <!-- /Main Panels -->
+    </div>
+    <!-- /Container -->
+
+    <!-- Popup -->
+    <div class="popup_"> </div>
+
+    <!-- Footer -->
+    <div class="footer_"> </div>
+</body>
+
+</html>

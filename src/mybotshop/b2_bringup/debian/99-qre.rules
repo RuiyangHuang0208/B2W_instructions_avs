@@ -1,0 +1,18 @@
+
+# Find Info
+# udevadm info --name=/dev/ttyACM0 --attribute-walk
+
+# Emlid
+SUBSYSTEM=="net", ACTION=="add", ATTR{address}=="3032:0013", NAME="emlid0"
+
+# Drotek
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1546", ATTRS{idProduct}=="01a9", SYMLINK+="drotek", MODE="0666"
+
+# Dynamixel
+SUBSYSTEMS=="usb-serial", MODE:="0666"
+
+# PS4
+SUBSYSTEM=="input", DRIVERS=="sony", SUBSYSTEMS=="hid", SYMLINK+="input/ps4", MODE="0666"
+
+# Logitech
+SUBSYSTEM=="usb", ATTR{idVendor}=="046d", ATTR{idProduct}=="c21f" SYMLINK+="input/logitech", MODE="0666"

@@ -1,0 +1,48 @@
+/**:
+  ros__parameters:
+    # Serial settings
+    serial_port: '/dev/arduino_sbus'
+    baud_rate: 115200
+
+    # Channel mapping (1-indexed, converted to 0-indexed internally)
+    channel_joint1: 2     # Base rotation
+    channel_joint2: 1     # Shoulder
+    channel_joint3: 3     # Elbow
+    channel_joint4: 4     # Wrist pitch
+    channel_joint5: 5     # Wrist roll
+    channel_joint6: 6     # Wrist yaw
+    channel_gripper: 7    # Gripper open/close
+    channel_enable: 14    # Dead-man switch
+
+    # Enable switch threshold
+    enable_threshold: 900    # Values above this = enabled
+
+    # SBUS value range
+    sbus_min: 172
+    sbus_max: 1811
+    sbus_center: 992
+
+    # Joint position limits (radians)
+    # Positive = stick deflection maps to positive joint angle
+    # Use negative values to invert direction if needed
+    max_joint1: -2.6    # Base rotation ~±150 deg (inverted)
+    max_joint2: 1.5     # Shoulder ~±86 deg (limited for safety)
+    max_joint3: 1.5     # Elbow ~±86 deg (limited to avoid overheat)
+    max_joint4: 1.5     # Wrist pitch ~±86 deg
+    max_joint5: -1.5    # Wrist roll ~±86 deg (inverted)
+    max_joint6: 1.5     # Wrist yaw ~±86 deg
+    max_gripper: -1.57  # Gripper range (0=open, -1.57=closed, inverted for intuitive control)
+
+    # Deadzone (fraction of half-range, 0.0-1.0)
+    deadzone: 0.01
+
+    # Publishing rate (Hz)
+    publish_rate: 20.0
+
+    # Control mode: 'position' or 'velocity'
+    # position: stick position = joint position (return to center = joint to zero)
+    # velocity: stick position = joint velocity (return to center = stop moving)
+    control_mode: 'velocity'
+
+    # Velocity scale (rad/s at full stick deflection, only for velocity mode)
+    velocity_scale: 1.5

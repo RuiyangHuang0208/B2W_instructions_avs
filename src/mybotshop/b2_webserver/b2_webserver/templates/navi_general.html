@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<!--
+Software License Agreement (BSD)
+
+@author    Salman Omar Sohail <support@mybotshop.de>
+@copyright (c) 2025, MYBOTSHOP GmbH, Inc., All rights reserved.
+-->
+
+<head>
+    <title>Navigation - Robot Webserver</title>
+    <link rel="icon" href="../static/media/logos/mbs_logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../static/styles.css" type="text/css" />
+    <script src="../static/scripts/common_script.js" defer></script>
+    <script src="../static/scripts/console_script.js" defer></script>
+</head>
+
+<body>
+    <div class="navbar"> </div>
+
+    <div class="container">
+
+        <!-- Background Media -->
+        <div class="background-media">
+            <img src="../static/media/wallpaper/wallpaper.webp" alt="Background GIF">
+        </div>
+
+        <!-- Main Panels -->
+        <div class="panel-container">
+
+            <!-- Info Board -->
+            <div class="panel information-panel">
+                <h2>Information <span style="color: var(--project-color);">Board</span></h2>
+                <hr class="heading-line">
+
+                <h3>Web <span style="color: var(--project-color);">Log</span></h3>
+                <span style="color: var(--project-color);">Server Response:</span> <span id="responseMessage">Awaiting
+                    commands</span>
+            </div>
+            <!-- /Info Board -->
+
+            <!-- Mission Panel -->
+            <div class="panel mission-panel">
+                <h2>Mission <span style="color: var(--project-color);">Panel</span></h2>
+                <hr class="heading-line">
+
+                <!-- Mission Sequence Control -->
+                <h3>Mission <span style="color: var(--project-color);">Sequence</span></h3>
+                <div class="control-buttons">
+                    <button onclick="webButton('play_mission')"><img src="../static/media/icons/play.png"
+                            style="width:16px; height:16px;"></button>
+                    <button onclick="webButton('pause_mission')"><img src="../static/media/icons/pause.png"
+                            style="width:16px; height:16px;"></button>
+                    <button onclick="webButton('cancel_current_mission')"><img src="../static/media/icons/cancel.png"
+                            style="width:16px; height:16px;"> CURR</button>
+                    <button onclick="webButton('cancel_all_missions')"><img src="../static/media/icons/cancel.png"
+                            style="width:16px; height:16px;"> ALL</button>
+                </div>
+                <!-- /Mission Sequence Control -->
+
+                <!-- Mission Planner -->
+                <h3>Mission <span style="color: var(--project-color);">Planner</span></h3>
+                <div class="control-buttons">
+                    <button onclick="webButton('mission_explore')">Explore</button>
+                    <button onclick="webButton('mission_navigate')">Navigate</button>
+                    <button onclick="webButton('mission_dock')">Dock</button>
+                </div>
+
+                <h3>Waypoint <span style="color: var(--project-color);">Control</span></h3>
+                <div class="control-buttons">
+                    <button onclick="webButton('mission_add_location')"> +</button>
+                    <button onclick="webButton('mission_remove_last_waypoint')"> - </button>
+                    <button onclick="webButton('mission_save_location')">Save</button>
+                    <button onclick="webButton('mission_load_yaml_waypoint')">Load</button>
+                    <button onclick="webButton('mission_remove_all_waypoints')">Reset</button>
+                </div>
+                <!-- /Mission Planner -->
+
+                <!-- Mission Name Predefined Sequence -->
+                <h3>Pre-defined <span style="color: var(--project-color);">Mission</span> Sequence</h3>
+                <div class="control">
+                    <label for="mission_name">Add Mission Name:</label>
+                    <input type="text" id="mission_name" placeholder="Enter mission name">
+                </div>
+                <div class="control">
+                    <label for="mission_coordinates">Add Mission Coordinates:</label>
+                    <input type="text" id="mission_coordinates" placeholder="Enter mission coordinates">
+                </div>
+                <div class="control-buttons">
+                    <button onclick="sendData()" class="transmission-btn">Transmit Mission Data</button>
+                </div>
+            </div>
+            <!-- /Mission Name Predefined Sequence -->
+
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup_"> </div>
+    
+    <!-- Footer -->
+    <div class="footer_"> </div>
+</body>
+
+</html>

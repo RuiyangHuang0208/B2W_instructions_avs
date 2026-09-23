@@ -1,0 +1,12 @@
+# To identify Arduino nano 
+KERNEL=="ttyACM[0-9]*", SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="8036", SYMLINK+="b2/nano", MODE="0666", GROUP="dialout"
+
+# Remove brltty incase it is not working, verification via dmesg
+# systemctl stop brltty-udev.service
+# sudo systemctl mask brltty-udev.service
+# systemctl stop brltty.service
+# systemctl disable brltty.service
+
+
+# USB Camera
+SUBSYSTEM=="video4linux", ATTRS{idVendor}=="1e45", ATTRS{idProduct}=="8022", ATTRS{serial}=="200910120001", SYMLINK+="b2/usbcam"
