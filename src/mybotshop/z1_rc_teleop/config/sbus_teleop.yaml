@@ -34,7 +34,7 @@
     max_gripper: -1.57  # Gripper range (0=open, -1.57=closed, inverted for intuitive control)
 
     # Deadzone (fraction of half-range, 0.0-1.0)
-    deadzone: 0.01
+    deadzone: 0.05
 
     # Publishing rate (Hz)
     publish_rate: 20.0

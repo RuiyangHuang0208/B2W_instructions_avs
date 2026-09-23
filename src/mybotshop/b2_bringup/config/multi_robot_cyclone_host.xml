@@ -4,7 +4,7 @@
     <Domain Id="10">
         <General>
             <Interfaces>
-                <NetworkInterface name="enx00e04c6804d9" priority="default" multicast="default" />
+                <NetworkInterface name="enx9cebe86d0a5d" priority="default" multicast="default" />
             </Interfaces>
             <AllowMulticast>true</AllowMulticast>
             <EnableMulticastLoopback>true</EnableMulticastLoopback>
@@ -12,9 +12,9 @@
         <Discovery>
             <Peers>
                 <!-- Robot PC -->
-                <Peer address="192.168.123.164"/>
-                <!-- Host PC -->
-                <Peer address="192.168.123.51"/>
+                <Peer address="192.168.68.168"/>
+                <!-- Remote PC -->
+                <Peer address="192.168.68.158"/>
             </Peers>
             <ParticipantIndex>auto</ParticipantIndex>
         </Discovery>

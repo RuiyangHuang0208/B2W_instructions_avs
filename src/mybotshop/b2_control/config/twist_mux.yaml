@@ -10,6 +10,10 @@
           topic   : joy_teleop/cmd_vel
           timeout : 0.5
           priority: 15
+        rc_teleop:
+          topic   : rc_teleop/cmd_vel
+          timeout : 0.5
+          priority: 18
         webserver:
           topic   : webserver/cmd_vel
           timeout : 0.5

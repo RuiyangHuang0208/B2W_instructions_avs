@@ -52,7 +52,7 @@ B2Camera::B2Camera() : Node("b2_camera_publisher")
                                                 " encoding-name=H264 ! rtph264depay ! "
                                                 "h264parse ! avdec_h264 ! videoconvert ! "
                                                 "video/x-raw,width=1280,height=720,format=RGB "
-                                                "! appsink name=appsink0 drop=1"; 
+                                                "! queue ! appsink name=appsink0 drop=1"; 
 
   GError *error = nullptr;
   pipeline = gst_parse_launch(gstreamer_str.c_str(), &error);
@@ -136,8 +136,30 @@ B2Camera::~B2Camera()
 
 void B2Camera::update_camera_image()
 {
-  std::lock_guard<std::mutex> lock(image_mutex);
   auto now = this->get_clock()->now();
+
+  // Pull sample directly from appsink (non-blocking with 0 timeout)
+  GstSample *sample = gst_app_sink_try_pull_sample(GST_APP_SINK(appsink), 0);
+  if (sample)
+  {
+    GstBuffer *buffer = gst_sample_get_buffer(sample);
+    if (buffer)
+    {
+      GstMapInfo map;
+      if (gst_buffer_map(buffer, &map, GST_MAP_READ))
+      {
+        if (map.data != nullptr && map.size >= (size_t)(picture_height * picture_width * 3))
+        {
+          cv::Mat frame(cv::Size(picture_width, picture_height), CV_8UC3, (char *)map.data);
+          camera_state = frame.clone();
+        }
+        gst_buffer_unmap(buffer, &map);
+      }
+    }
+    gst_sample_unref(sample);
+  }
+
+  // Publish image if we have data
   if (!camera_state.empty())
   {
     pub_camera_data_image->header.stamp = now;
@@ -152,16 +174,10 @@ void B2Camera::update_camera_image()
   }
   else
   {
-    // This log indicates that the on_new_sample_from_sink callback is not
-    // successfully updating the camera_state. This could be due to:
-    // - No data being received by udpsrc
-    // - Errors in the GStreamer pipeline after udpsrc
-    // - Failure in gst_app_sink_pull_sample or gst_buffer_map
     RCLCPP_ERROR_THROTTLE(this->get_logger(), *this->get_clock(), 5000, "%s", colorize("No B2 Camera Data Received in update_camera_image. Check GStreamer pipeline status and incoming UDP stream.", "red").c_str());
   }
 
   // Publish camera info regardless of whether a new image was received
-  // This ensures the camera_info topic is regularly updated.
   *pub_camera_data_info = camera_info_manager_->getCameraInfo();
   pub_camera_data_info->header.stamp = now;
   pub_camera_data_info->header.frame_id = robot_camera_link;

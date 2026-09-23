@@ -5,14 +5,15 @@ SBUS RC Teleop Node for Z1 Robotic Arm
 Reads SBUS RC receiver data from Arduino serial port and publishes
 joint position commands to control the Z1 arm.
 
-Channel mapping:
-  CH1 -> Joint 1 (base rotation)
-  CH2 -> Joint 2 (shoulder)
+Channel mapping (must match config/sbus_teleop.yaml, which is what gets loaded):
+  CH1 -> Joint 2 (shoulder)
+  CH2 -> Joint 1 (base rotation)
   CH3 -> Joint 3 (elbow)
   CH4 -> Joint 4 (wrist pitch)
   CH5 -> Joint 5 (wrist roll)
   CH6 -> Joint 6 (wrist yaw)
-  CH15 -> Gripper (open/close)
+  CH7 -> Gripper (open/close)
+  CH14 -> Dead-man (enable)
 """
 
 import rclpy
@@ -32,13 +33,13 @@ class Z1SbusTeleopNode(Node):
         self.declare_parameter('baud_rate', 115200)
 
         # Channel mapping (1-indexed in config, convert to 0-indexed)
-        self.declare_parameter('channel_joint1', 1)
-        self.declare_parameter('channel_joint2', 2)
+        self.declare_parameter('channel_joint1', 2)
+        self.declare_parameter('channel_joint2', 1)
         self.declare_parameter('channel_joint3', 3)
         self.declare_parameter('channel_joint4', 4)
         self.declare_parameter('channel_joint5', 5)
         self.declare_parameter('channel_joint6', 6)
-        self.declare_parameter('channel_gripper', 15)
+        self.declare_parameter('channel_gripper', 7)
         self.declare_parameter('channel_enable', 14)
 
         self.declare_parameter('enable_threshold', 900)
@@ -65,6 +66,21 @@ class Z1SbusTeleopNode(Node):
 
         # Velocity mode settings (radians per second when stick is full deflection)
         self.declare_parameter('velocity_scale', 0.5)
+
+        # Safe fixed gripper target (rad). z1_ctrl runs its OWN internal position
+        # loop for the gripper that ignores the kp/kd we set, so neutralizing gains
+        # does not neutralize the gripper. The only way to stop it ratcheting into
+        # its hard stop (where it stalls and overheats Motor 7) is to pin the
+        # COMMAND to a value safely inside both stops. -0.8 is mid-range
+        # (open = 0, closed = -1.57).
+        self.declare_parameter('gripper_safe_position', -0.8)
+
+        # Gripper stick control is ABSOLUTE and clamped to a safe band centered on
+        # gripper_safe_position with this half-width. With safe=-0.8 and half_range=0.5
+        # the gripper command can only ever sit in [-1.3, -0.2], strictly inside both
+        # hard stops (open=0, closed=-1.57) so it can never stall/overheat. Set
+        # half_range to 0.0 to fully pin the gripper (no stick control).
+        self.declare_parameter('gripper_half_range', 0.5)
 
         # Get parameters
         self.serial_port = self.get_parameter('serial_port').value
@@ -102,6 +118,8 @@ class Z1SbusTeleopNode(Node):
         self.publish_rate = self.get_parameter('publish_rate').value
         self.control_mode = self.get_parameter('control_mode').value
         self.velocity_scale = self.get_parameter('velocity_scale').value
+        self.gripper_safe = self.get_parameter('gripper_safe_position').value
+        self.gripper_half_range = self.get_parameter('gripper_half_range').value
 
         # Publisher for position controller
         self.position_pub = self.create_publisher(
@@ -234,6 +252,18 @@ class Z1SbusTeleopNode(Node):
 
         return normalized * max_value
 
+    def compute_gripper_cmd(self, channels):
+        """Absolute, clamped gripper command (see gripper_half_range note in __init__).
+
+        Maps the gripper stick to an absolute position in a safe band centered on
+        gripper_safe, so the command can never reach a hard stop (no stall/overheat).
+        No velocity integration -> passive-revert hiccups cannot ratchet it open.
+        """
+        offset = self.map_sbus_to_value(channels[self.ch_gripper], self.gripper_half_range)
+        lo = self.gripper_safe - self.gripper_half_range
+        hi = self.gripper_safe + self.gripper_half_range
+        return max(lo, min(hi, self.gripper_safe + offset))
+
     def publish_commands(self):
         """Publish joint position commands based on current SBUS values."""
         with self.serial_lock:
@@ -259,11 +289,8 @@ class Z1SbusTeleopNode(Node):
                 pos = self.map_sbus_to_value(channels[self.ch_joints[i]], self.max_joints[i])
                 pos = max(-limit, min(limit, pos))
                 positions.append(pos)
-            # Gripper position
-            gripper_limit = abs(self.max_gripper)
-            gripper_pos = self.map_sbus_to_value(channels[self.ch_gripper], self.max_gripper)
-            gripper_pos = max(-gripper_limit, min(gripper_limit, gripper_pos))
-            positions.append(gripper_pos)
+            # Gripper: absolute, clamped stick control (cannot reach a hard stop).
+            positions.append(self.compute_gripper_cmd(channels))
         else:
             # Velocity mode: stick position = joint velocity
             dt = 1.0 / self.publish_rate
@@ -277,14 +304,13 @@ class Z1SbusTeleopNode(Node):
                 new_pos = max(-limit, min(limit, new_pos))
                 positions.append(new_pos)
                 self.current_positions[i] = new_pos
-            # Gripper velocity mode
-            gripper_sign = 1.0 if self.max_gripper >= 0 else -1.0
-            gripper_limit = abs(self.max_gripper)
-            gripper_velocity = self.map_sbus_to_value(channels[self.ch_gripper], self.velocity_scale) * gripper_sign
-            new_gripper = self.current_positions[6] + gripper_velocity * dt
-            new_gripper = max(-gripper_limit, min(gripper_limit, new_gripper))
-            positions.append(new_gripper)
-            self.current_positions[6] = new_gripper
+            # Gripper: absolute, clamped stick control (cannot reach a hard stop).
+            # NOT velocity-integrated — integrating from the measured position let the
+            # gripper ratchet to its open stop on every passive-revert hiccup, where it
+            # stalled and overheated.
+            g = self.compute_gripper_cmd(channels)
+            positions.append(g)
+            self.current_positions[6] = g
 
         # Publish position command
         msg = Float64MultiArray()

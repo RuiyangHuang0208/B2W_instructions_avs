@@ -5,6 +5,7 @@
         <General>
             <Interfaces>
                 <NetworkInterface name="eno2" priority="default" multicast="default" />
+                <NetworkInterface name="ztrta7id6z" priority="default" multicast="default" />
             </Interfaces>
             <AllowMulticast>true</AllowMulticast>
             <EnableMulticastLoopback>true</EnableMulticastLoopback>
@@ -15,6 +16,8 @@
                 <Peer address="192.168.123.164"/>
                 <!-- Host PC -->
                 <Peer address="192.168.123.51"/>
+                <!-- Remote PC via ZeroTier -->
+                <Peer address="172.22.162.218"/>
             </Peers>
             <ParticipantIndex>auto</ParticipantIndex>
             <MaxAutoParticipantIndex>100</MaxAutoParticipantIndex>
